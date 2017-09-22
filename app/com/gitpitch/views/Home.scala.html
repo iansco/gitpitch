@@ -1,6 +1,9 @@
 @import com.gitpitch.views.html.frags._
 
-@(rndr: com.gitpitch.utils.GitRepoRenderer, deps: com.gitpitch.policies.Dependencies, offline: Boolean)
+@(rndr: com.gitpitch.utils.GitRepoRenderer,
+  deps: com.gitpitch.policies.Dependencies,
+  offline: Boolean,
+  userAgentIsChrome: Boolean)
 <!DOCTYPE html>
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -59,11 +62,11 @@
         </tr>
         <tr>
           <td class="git-label">Branch:</td>
-          <td><a href="@rndr.branchHub(rndr.branch())"><div class="short-link">@rndr.branch()</div></a></td>
+          <td><a href="@rndr.branchHub(rndr.params())"><div class="short-link">@rndr.branch()</div></a></td>
         </tr>
         <tr>
           <td class="git-label">Pitch:</td>
-          <td><a href="@rndr.pitchHub(rndr.branch(), rndr.pitchme())"><div class="short-link">PITCHME.md</div></a></td>
+          <td><a href="@rndr.pitchHub(rndr.params())"><div class="short-link">PITCHME.md</div></a></td>
         </tr>
       </table>
 
@@ -97,14 +100,24 @@
       </p>
     } else {
       <ul>
-        <li class="slideshow"><a href="@rndr.offlineLink()" target="_blank">
+        <li class="slideshow" title="Download GitPitch presentation for offline use.">
+          <a href="@rndr.offlineLink()" target="_blank">
           <i class="fa fa-download" aria-hidden="true">
           </i> Offline Presentation</a>
         </li>
-        <li class="slideshow"><a href="@rndr.printBrowserLink()" target="_blank">
+        @if(userAgentIsChrome) {
+        <li class="slideshow" title="Print GitPitch presentation as PDF document.">
+          <a href="@rndr.printBrowserLink()" target="_blank">
           <i class="fa fa-print" aria-hidden="true">
           </i> Print PDF Presentation</a>
         </li>
+        } else {
+        <li class="slideshow" style="color: gray"
+            title="GitPitch print service requires Chrome browser."><a href="#">
+          <i class="fa fa-print" aria-hidden="true" style="color: gray">
+          </i> <span style="color: gray">Print Service Disabled</span></a>
+        </li>
+        }
       </ul>
       }
 

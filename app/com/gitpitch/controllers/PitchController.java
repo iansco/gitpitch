@@ -385,7 +385,10 @@ public class PitchController extends Controller {
                 GitRepoRenderer.build(pp, grm, cfg, grsManager.listGRS());
 
         return CompletableFuture.completedFuture(
-                ok(com.gitpitch.views.html.Home.render(rndr, deps, isOffline)));
+                ok(com.gitpitch.views.html.Home.render(rndr,
+                                                       deps,
+                                                       isOffline,
+                                                       userAgentIsChrome())));
 
     } // home action
 
@@ -589,6 +592,21 @@ public class PitchController extends Controller {
      */
     private String grsOnCall(String grsParam) {
         return grsManager.getType(grsParam);
+    }
+
+    private boolean userAgentIsChrome() {
+        boolean isChrome = false;
+        try {
+            String[]  userAgentHeaders =
+                request().headers().get(Http.HeaderNames.USER_AGENT);
+            if(userAgentHeaders.length > 0) {
+                String userAgent = userAgentHeaders[0];
+                isChrome = userAgent.contains("Chrome/") ||
+                            userAgent.contains("Chromium/");
+            }
+
+        } catch(Exception ex) {}
+        return isChrome;
     }
 
     private static final String PITCHME_PRINT_ERROR =

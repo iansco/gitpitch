@@ -336,18 +336,25 @@ public class GitRepoRenderer {
     /*
      * Return https://{grs}/{user}/{repo}/tree/{branch}
      */
-    public String branchHub(String branch) {
-        return _repoHub + GIT_TREE + branch;
+    public String branchHub(PitchParams pp) {
+      if(GRS_BITBUCKET.equals(pp.grs))
+        return "#";
+      else
+        return _repoHub + GIT_TREE + pp.branch;
     }
 
     /*
      * Return https://{grs}/{user}/{repo}/blob/{branch}/{pitchme}
      */
-    public String pitchHub(String branch, String pitchme) {
-      if(pitchme != null)
-          return _repoHub + GIT_BLOB + branch + "/" + pitchme + DEFAULT_PITCHME;
-      else
-          return _repoHub + GIT_BLOB + branch + DEFAULT_PITCHME;
+    public String pitchHub(PitchParams pp) {
+      if(GRS_BITBUCKET.equals(pp.grs)) {
+        return "#";
+      } else {
+        if(pp.pitchme != null)
+            return _repoHub + GIT_BLOB + pp.branch + "/" + pp.pitchme + DEFAULT_PITCHME;
+        else
+            return _repoHub + GIT_BLOB + pp.branch + DEFAULT_PITCHME;
+      }
 
     }
 
@@ -613,6 +620,8 @@ public class GitRepoRenderer {
         "<i class='fa fa-bitbucket' aria-hidden='true'></i>";
     private static final String GIT_DEFAULT_ICON =
         "<i class='fa fa-git-square' aria-hidden='true'></i>";
+
+    private static final String GRS_BITBUCKET = "bitbucket";
 
     private static final String AS_DESCR =
         "Markdown Presentation powered by GitPitch.";
