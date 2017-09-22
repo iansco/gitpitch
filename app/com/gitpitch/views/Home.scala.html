@@ -103,21 +103,13 @@
         <li class="slideshow" title="Download GitPitch presentation for offline use.">
           <a href="@rndr.offlineLink()" target="_blank">
           <i class="fa fa-download" aria-hidden="true">
-          </i> Offline Presentation</a>
+          </i> Download Presentation</a>
         </li>
-        @if(userAgentIsChrome) {
         <li class="slideshow" title="Print GitPitch presentation as PDF document.">
-          <a href="@rndr.printBrowserLink()" target="_blank">
+          <a href="@rndr.printLink()" target="_blank">
           <i class="fa fa-print" aria-hidden="true">
           </i> Print PDF Presentation</a>
         </li>
-        } else {
-        <li class="slideshow" style="color: gray"
-            title="GitPitch print service requires Chrome browser."><a href="#">
-          <i class="fa fa-print" aria-hidden="true" style="color: gray">
-          </i> <span style="color: gray">Print Service Disabled</span></a>
-        </li>
-        }
       </ul>
       }
 

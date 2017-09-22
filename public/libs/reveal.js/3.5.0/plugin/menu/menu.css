@@ -59,10 +59,8 @@
 	background-color: black;
 }
 
-
 .reveal .active-menu-panel li.active {
-	# color: #eee;
-	color: #e48436;
+	color: #eee;
 }
 
 .reveal .active-menu-panel a.active {

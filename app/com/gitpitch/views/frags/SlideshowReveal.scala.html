@@ -1,7 +1,10 @@
 @(ssm: com.gitpitch.models.SlideshowModel, deps: com.gitpitch.policies.Dependencies, offline:Boolean, serverPrinting: Boolean, webPrinting: Boolean)
 
     <script>
+        console.log("slideshowreveal.scala: about to Reveal.initialize")
         Reveal.initialize({
+            controls: true,
+            progress: true,
             embedded: true,
             margin: 0.0,
             showNotes: @ssm.showNotes(),
@@ -69,8 +72,10 @@
             },
             }
             dependencies: [
-                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/marked.js"},
-                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/markdown.js"},
+                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/marked.js",
+                  condition: function() { return !!document.querySelector( '[data-markdown]' ); }},
+                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/markdown.js",
+                condition: function() { return !!document.querySelector( '[data-markdown]' ); }},
                 @if(!(serverPrinting || webPrinting)) {
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/menu/menu.js", async: true},
                 /*
@@ -88,8 +93,8 @@
                 @if(deps.highlightPluginEnabled()) {
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/highlight/highlight.js", async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
                 } else {
-                { src: '@deps.highlightjs(offline)/highlight.js' },
-                { src: '@deps.highlightjs(offline)/reveal-code-focus-1.0.0-mod.js',
+                { src: '@deps.highlightjs(offline)/highlight.js', async: true },
+                { src: '@deps.highlightjs(offline)/reveal-code-focus-1.0.0-mod.js', async: true,
                   callback: function() {
                     RevealCodeFocus();
                   }
@@ -100,6 +105,7 @@
                 }
             ]
         });
+        console.log("slideshowreveal.scala: after Reveal.initialize")
 
         Reveal.addEventListener('ready', function(evt) {
           if (evt.indexh === 0 && evt.indexv === 0) {

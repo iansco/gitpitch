@@ -50,23 +50,34 @@
             margin-right: 0px !important;
         }
 
+        .reveal .active-menu-panel li.disabled-theme {
+        	text-decoration: line-through;
+        	opacity: 0.3;
+        	color: white;
+        	background-color: black;
+        }
+
+        .reveal .active-menu-panel li.active {
+        	color: #e48436;
+        }
+
+        .reveal .active-menu-panel a.active {
+            color: #e48436;
+        }
+
         //
         // GitPitch Reveal Footer Plugin Styling Overrides.
         //
 
-        #title-footer span.footer-fade {
-          opacity: 0.6;
-          color: gray;
-          font-size: 1.5vh;
-        }
-
-        #title-footer span.footer-hard {
+        #title-footer p.footer-hard {
           opacity: 1;
           color: gray;
         }
 
-        #notiication {
-          opacity: 0.4;
+        #title-footer p.footer-fade {
+          opacity: 0.6;
+          color: gray;
+          font-size: 1.5vh;
         }
 
         span.footer-help {

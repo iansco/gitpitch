@@ -124,15 +124,17 @@
           var notification = document.getElementById('notification')
           if(notification != undefined) {
             if(fade) {
-              notification.innerHTML = "<span class='footer-fade'>" + msg + "</span>";
+              notification.className = "footer-fade";
+              notification.innerHTML = msg;
             } else {
-              notification.innerHTML = "<span class='footer-hard'>" + msg + "</span>";
+              notification.className = "footer-hard";
+              notification.innerHTML = msg;
             }
           }
         };
 
         function pushHelpNotification() {
-          pushNotification("<span class='footer-hard'>Navigate : Space / Arrow Keys | <a href='#' onclick='RevealMenu.toggle()'>M</a> - Menu | <a href='#' onclick='enterFullscreen()'>F</a> - Fullscreen | <a href='#' onclick='enterOverview()'>O</a> - Overview | <a href='#' onclick='enterBlackout()'>B</a> - Blackout | <a href='#' onclick='RevealNotes.open()'>S</a> - Speaker | <a href='#' onclick='enterHelp()'>?</a> - Help</span>");
+          pushNotification("Navigate : Space / Arrow Keys | <a href='#' onclick='RevealMenu.toggle()'>M</a> - Menu | <a href='#' onclick='enterFullscreen()'>F</a> - Fullscreen | <a href='#' onclick='enterOverview()'>O</a> - Overview | <a href='#' onclick='enterBlackout()'>B</a> - Blackout | <a href='#' onclick='RevealNotes.open()'>S</a> - Speaker | <a href='#' onclick='enterHelp()'>?</a> - Help");
 
         }
 
