@@ -101,8 +101,9 @@
             </section>
             }
         </div>
-
+        @if(!(serverPrinting || webPrinting)) {
         <footer id="title-footer"><p id="notification"></p></footer>
+        }
 
     </div>
 
@@ -121,10 +122,12 @@
 
         function pushNotification(msg, fade) {
           var notification = document.getElementById('notification')
-          if(fade) {
-            notification.innerHTML = "<span class='footer-fade'>" + msg + "</span>";
-          } else {
-            notification.innerHTML = "<span class='footer-hard'>" + msg + "</span>";
+          if(notification != undefined) {
+            if(fade) {
+              notification.innerHTML = "<span class='footer-fade'>" + msg + "</span>";
+            } else {
+              notification.innerHTML = "<span class='footer-hard'>" + msg + "</span>";
+            }
           }
         };
 
@@ -142,7 +145,7 @@
         }
 
         function pushCodePresentingStepNotification(step, frags) {
-          pushNotification("Code Step " + step + " / " + frags, true);
+          pushNotification("Code Presenting - Step " + step + " / " + frags, true);
         }
 
         window.addEventListener("codepresenting", function(evt) {

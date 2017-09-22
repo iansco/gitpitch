@@ -1,3 +1,5 @@
+@import com.gitpitch.views.html.frags._
+
 @(rndr: com.gitpitch.utils.GitRepoRenderer, deps: com.gitpitch.policies.Dependencies, offline: Boolean)
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -8,130 +10,6 @@
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
-  <head>
-    <style>
-
-    div.pitch-menu {
-      width: 100%;
-      text-align: center;
-      padding-top: 20px;
-    }
-
-    div.pitch-menu .logo {
-      color: white;
-      font-size: 2.0em;
-      font-weight: bold;
-      letter-spacing: 2.0px;
-    }
-
-    div.pitch-menu .logo-git {
-      color: #e48436;
-    }
-
-    div.pitch-menu .tagline-box {
-      padding: 0px;
-    }
-
-    div.pitch-menu .tagline-box p {
-      padding: 0px;
-      margin: 2px;
-      letter-spacing: 2px;
-    }
-
-    div.pitch-menu .tagline {
-      color: gray;
-    }
-
-    div.pitch-menu div.section-heading {
-      color: white;
-      font-size: 1.1em;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    div.pitch-menu .git-box {
-      border: 2px solid gray;
-      border-radius: 10px;
-    }
-
-    div.pitch-menu .git-box .short-link {
-      width: 8em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    div.pitch-menu .git-box a {
-      text-decoration:none;
-    }
-
-    div.pitch-menu .git-box hr.fade-away {
-        border: 1;
-        border-color: gray;
-        color: gray;
-        background-color: gray;
-        width: 85%;
-    }
-
-    div.pitch-menu .git-box a a:hover {
-      color: #e48436;
-    }
-
-    div.pitch-menu .git-box table th, div.pitch-menu table td {
-      text-align: left;
-      # padding: 1.0em 1.5em 1.0em 1.5em;
-      padding: 1.0em 0.5em 1.0em 0.5em;
-      border: 0;
-    }
-
-    div.pitch-menu .git-label {
-      color: gray;
-    }
-
-    div.pitch-menu .git-octicon {
-      font: normal normal normal 16px/1 octicons;
-      font-size:1.1em;
-      color: white;
-    }
-
-    div.pitch-menu .git-octicon .star-fork {
-      padding-left: 4px;
-      color: white;
-    }
-
-    div.pitch-menu ul {
-      list-style-type: none;
-      margin: 0px 0 0px 0;
-    }
-
-    div.pitch-menu ul li.slideshow {
-      padding: 15px 0 15px 0;
-      font-size: 0.95em;
-      # text-transform: capitalize;
-      letter-spacing: 1.5px;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    div.pitch-menu ul li.home-git {
-      padding: 15px 0 15px 0;
-      font-size: 1.0em;
-      letter-spacing: 1.5px;
-      text-align: center;
-    }
-
-    div.pitch-menu ul li.home-themes {
-      padding: 15px 0 15px 0;
-      font-size: 1.0em;
-      text-transform: capitalize;
-      letter-spacing: 1.5px;
-      text-align: center;
-    }
-
-    </style>
-
-  </head>
-
   <body>
   <div class="pitch-menu">
 
@@ -156,26 +34,36 @@
 
     <div class="git-box">
 
-      <div style="padding-top: 25px; padding-bottom: 10px;"><span class="git-octicon" style="font-size: 1.2em"><span class="octicon octicon-mark-github"></span><span style="text-transform: uppercase; color: gray; padding-left: 15px;">GitHub Slideshow</span></div>
+      <div style="padding-top: 25px; padding-bottom: 10px;">
+        <span class="git-octicon">
+          <!--
+          <span class="octicon octicon-mark-github"></span>
+          -->
+          @Html(rndr.getGRSIcon(rndr.params()))
+          <span style="text-transform: uppercase; color: gray; padding-left: 5px;">
+            @rndr.getGRS(rndr.params()) Slideshow
+          </span>
+        </span>
+      </div>
 
       <hr class="fade-away">
 
       <table>
         <tr>
           <td class="git-label">User:</td>
-          <td><a href="#"><div class="short-link">@rndr.user()</div></a></td>
+          <td><a href="@rndr.orgHub()"><div class="short-link">@rndr.user()</div></a></td>
         </tr>
         <tr>
           <td class="git-label">Repo:</td>
-          <td><a href="#"><div class="short-link">@rndr.repo()</div></a></td>
+          <td><a href="@rndr.repoHub()"><div class="short-link">@rndr.repo()</div></a></td>
         </tr>
         <tr>
           <td class="git-label">Branch:</td>
-          <td><a href="#"><div class="short-link">@rndr.branch()</div></a></td>
+          <td><a href="@rndr.branchHub(rndr.branch())"><div class="short-link">@rndr.branch()</div></a></td>
         </tr>
         <tr>
           <td class="git-label">Pitch:</td>
-          <td><a href="#"><div class="short-link">PITCHME.md</div></a></td>
+          <td><a href="@rndr.pitchHub(rndr.branch(), rndr.pitchme())"><div class="short-link">PITCHME.md</div></a></td>
         </tr>
       </table>
 
@@ -200,20 +88,25 @@
 
       <hr class="fade-away">
 
+      @if(offline) {
+      <br>
+      <p style="letter-spacing: 2px">
+        Promote, Pitch, Or Present
+        <br>
+        Absolutely Anything ;-)
+      </p>
+    } else {
       <ul>
         <li class="slideshow"><a href="@rndr.offlineLink()" target="_blank">
           <i class="fa fa-download" aria-hidden="true">
           </i> Offline Presentation</a>
         </li>
-        <li class="slideshow"><a href="@rndr.printLink()" target="_blank">
-          <i class="fa fa-print" aria-hidden="true">
-          </i> Print PDF On Server</a>
-        </li>
         <li class="slideshow"><a href="@rndr.printBrowserLink()" target="_blank">
           <i class="fa fa-print" aria-hidden="true">
-          </i> Print PDF In Browser</a>
+          </i> Print PDF Presentation</a>
         </li>
       </ul>
+      }
 
       <br><br>
 

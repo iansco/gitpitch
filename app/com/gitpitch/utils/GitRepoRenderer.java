@@ -236,6 +236,13 @@ public class GitRepoRenderer {
     }
 
     /*
+     * Return GitHub {pitchme} path.
+     */
+    public String pitchme() {
+        return _pp.pitchme;
+    }
+
+    /*
      * Return pitch slideshow theme.
      */
     public String theme() {
@@ -313,17 +320,35 @@ public class GitRepoRenderer {
     }
 
     /*
-     * Return https://github.com/{user}.
+     * Return https://{grs}/{user}.
      */
     public String orgHub() {
         return _orgHub;
     }
 
     /*
-     * Return https://github.com/{user}/{repo}.
+     * Return https://{grs}/{user}/{repo}.
      */
     public String repoHub() {
         return _repoHub;
+    }
+
+    /*
+     * Return https://{grs}/{user}/{repo}/tree/{branch}
+     */
+    public String branchHub(String branch) {
+        return _repoHub + GIT_TREE + branch;
+    }
+
+    /*
+     * Return https://{grs}/{user}/{repo}/blob/{branch}/{pitchme}
+     */
+    public String pitchHub(String branch, String pitchme) {
+      if(pitchme != null)
+          return _repoHub + GIT_BLOB + branch + "/" + pitchme + DEFAULT_PITCHME;
+      else
+          return _repoHub + GIT_BLOB + branch + DEFAULT_PITCHME;
+
     }
 
     /*
@@ -503,6 +528,26 @@ public class GitRepoRenderer {
         return _grsServices;
     }
 
+    public String getGRSIcon(PitchParams pp) {
+
+        String icon = GIT_DEFAULT_ICON;
+
+        switch(pp.grs) {
+
+            case "github":
+                icon = GITHUB_ICON;
+                break;
+            case "gitlab":
+                icon = GITLAB_ICON;
+                break;
+            case "bitbucket":
+                icon = BITBUCKET_ICON;
+                break;
+        }
+
+        return icon;
+    }
+
     public List<String> listThemes() {
       return _cfg.getStringList("gitpitch.revealjs.themes");
     }
@@ -531,6 +576,8 @@ public class GitRepoRenderer {
     }
 
     private static final String GIT_MASTER = "master";
+    private static final String GIT_TREE   = "/tree/";
+    private static final String GIT_BLOB   = "/blob/";
     private static final String CSS = ".css";
     private static final String SLIDESHOW = "/pitchme/slideshow/";
     private static final String MARKDOWN = "/pitchme/markdown/";
@@ -545,6 +592,7 @@ public class GitRepoRenderer {
     private static final String BADGE_OPEN =
             "[![GitPitch](https://gitpitch.com/assets/badge.svg)](";
     private static final String BADGE_CLOSE = ")";
+    private static final String DEFAULT_PITCHME = "/PITCHME.md";
     private static final String DEFAULT_THEME = "white";
     private static final List<String> THEMES = Arrays.asList(DEFAULT_THEME,
             "beige", "black", "moon", "night", "sky", "white");
@@ -556,6 +604,15 @@ public class GitRepoRenderer {
     private static final String GRS_GITLAB_FORKS = "graphs/";
     private static final String GRS_BITBUCKET_STARS = "commits/all";
     private static final String GRS_BITBUCKET_FORKS = "branches";
+
+    private static final String GITHUB_ICON =
+        "<span class='octicon octicon-mark-github'></span>";
+    private static final String GITLAB_ICON =
+        "<i class='fa fa-gitlab' aria-hidden='true'></i>";
+    private static final String BITBUCKET_ICON =
+        "<i class='fa fa-bitbucket' aria-hidden='true'></i>";
+    private static final String GIT_DEFAULT_ICON =
+        "<i class='fa fa-git-square' aria-hidden='true'></i>";
 
     private static final String AS_DESCR =
         "Markdown Presentation powered by GitPitch.";

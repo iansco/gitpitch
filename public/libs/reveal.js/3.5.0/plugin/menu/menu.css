@@ -48,7 +48,11 @@
 	color: white;
 }
 
-.reveal .active-menu-panel li.disabled {
+.reveal .active-menu-panel li.fixed-theme {
+	border-top: solid 1px #1a1a1a;
+}
+
+.reveal .active-menu-panel li.disabled-theme {
 	text-decoration: line-through;
 	opacity: 0.3;
 	color: white;
