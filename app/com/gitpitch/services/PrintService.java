@@ -153,10 +153,10 @@ public class PrintService {
         String filePath = diskService.asFile(pp, pp.PDF()).toString();
 
         String slideshowUrl =
-                com.gitpitch.controllers.routes.PitchController.landing(pp.grs,
-                        pp.user,
+                com.gitpitch.controllers.routes.PitchController.landing(pp.user,
                         pp.repo,
                         pp.branch,
+                        pp.grs,
                         pp.theme,
                         pp.pitchme,
                         pp.notes,
