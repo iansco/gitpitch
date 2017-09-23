@@ -196,7 +196,7 @@ public class OfflineService {
                 status = fetchLandingHTML(pp, zipRoot);
 
             if (status == STATUS_OK)
-                status = fetchSlideshowHTML(pp, zipRoot);
+                status = fetchHomeHTML(pp, zipRoot);
 
             if (status == STATUS_OK)
                 fetchFixedDependencies(pp, zipRoot);
@@ -298,6 +298,25 @@ public class OfflineService {
 
         return diskService.download(pp, zipRoot,
                 surl, SLIDESHOW_HTML, grsManager.get(pp).getHeaders());
+    }
+
+    /*
+     * Fetch Home.html.
+     */
+    private int fetchHomeHTML(PitchParams pp, Path zipRoot) {
+
+        String surl =
+                com.gitpitch.controllers.routes.PitchController.home(pp.grs,
+                        pp.user,
+                        pp.repo,
+                        pp.branch,
+                        pp.theme,
+                        pp.pitchme,
+                        ENABLED)
+                        .absoluteURL(isEncrypted(), hostname());
+
+        return diskService.download(pp, zipRoot,
+                surl, HOME_HTML, grsManager.get(pp).getHeaders());
     }
 
     /*
@@ -640,6 +659,7 @@ public class OfflineService {
     private static final String PITCHME_CSS = "PITCHME.css";
     private static final String INDEX_HTML  = "index.html";
     private static final String SLIDESHOW_HTML = "pitchme.html";
+    private static final String HOME_HTML = "home.html";
     private static final String FIXED_ASSETS = "/public/libs";
     private static final String FIXED_ASSETS_MATH = "/public/libs-math";
     private static final String ZIP_CMD   = "zip";

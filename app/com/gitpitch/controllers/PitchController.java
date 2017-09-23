@@ -135,17 +135,17 @@ public class PitchController extends Controller {
                                            String theme,
                                            String pitchme,
                                            String notes,
-                                           String fragments,
                                            String offline,
+                                           String fragments,
                                            String webprint) {
 
         PitchParams pp =
             PitchParams.build(grsOnCall(grs),
                     user, repo, branch, theme, pitchme, notes);
-        boolean serverPrinting =
-                (fragments == null) ? false : !Boolean.parseBoolean(fragments);
         boolean isOffline =
                 (offline == null) ? false : Boolean.parseBoolean(offline);
+        boolean serverPrinting =
+                (fragments == null) ? false : !Boolean.parseBoolean(fragments);
         boolean webPrinting =
                 (webprint == null) ? false : Boolean.parseBoolean(webprint);
 

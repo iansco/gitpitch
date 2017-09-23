@@ -457,6 +457,12 @@ public class SlideshowModel {
             _yOpts.fetchRevealVersion(params()) : null;
     }
 
+    /*
+     * Return presentation Help message.
+     */
+    public String fetchHelp() {
+        return HELP;
+    }
 
     public String toString() {
         return _pretty;
@@ -539,4 +545,15 @@ public class SlideshowModel {
                     put("bottom-right", "position: fixed; bottom: 20px; right: 20px; z-index: 1");
                 }
             });
+
+    private static final String HELP =
+        "<span style='color: gray; letter-spacing: 1.5px'>" +
+        "Navigate : Space / Arrow Keys | " +
+        "<a href='#' onclick='RevealMenu.toggle()'>M</a> - Menu | " +
+        "<a href='#' onclick='enterFullscreen()'>F</a> - Fullscreen | " +
+        "<a href='#' onclick='enterOverview()'>O</a> - Overview | " +
+        "<a href='#' onclick='enterBlackout()'>B</a> - Blackout | " +
+        "<a href='#' onclick='RevealNotes.open()'>S</a> - Speaker | " +
+        "<a href='#' onclick='enterHelp()'>?</a> - Help" +
+        "</span>";
 }

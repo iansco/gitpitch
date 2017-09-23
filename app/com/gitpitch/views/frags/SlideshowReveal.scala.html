@@ -42,20 +42,15 @@
               themes: [
                 { name: 'Black', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/black.css' },
                 { name: 'White', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/white.css' },
-                // { name: 'League', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/league.css' },
                 { name: 'Sky', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/sky.css' },
                 { name: 'Beige', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/beige.css' },
-                // { name: 'Simple', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/simple.css' },
-                // { name: 'Serif', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/serif.css' },
-                // { name: 'Blood', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/blood.css' },
                 { name: 'Night', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/night.css' },
                 { name: 'Moon', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/moon.css' }
-                // { name: 'Solarized', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/solarized.css' }
               ],
               // themes : false,
               custom: [
                 @if(offline) {
-                { title: 'Home', active: true, icon: '<i class="fa fa-bookmark">', src: '@ssm.homePanel(offline)' }
+                { title: 'Home', active: true, icon: '<i class="fa fa-bookmark">', src: 'home.html' }
                 } else {
                 { title: 'Home', active: true, icon: '<i class="fa fa-bookmark">', src: '@ssm.homePanel(offline)' },
                 { title: 'Themes', icon: '<i class="fa fa-code-fork">', src: '@ssm.gitPanel()' },
