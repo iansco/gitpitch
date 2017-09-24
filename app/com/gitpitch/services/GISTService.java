@@ -68,7 +68,11 @@ public class GISTService {
 
         try {
 
+            log.debug("build: md={}", md);
+            log.debug("build: pp={}", pp);
+            log.debug("build: dp={}", dp);
             String gid = dp.get(MarkdownModel.DELIM_QUERY_GIST);
+            log.debug("build: gid={}", gid);
 
             if(backCompat(gid)) {
               log.debug("build: back-compat, gid={}", gid);
@@ -108,10 +112,11 @@ public class GISTService {
 
             }
 
-        } catch (Exception gex) {
+        } catch (Exception ex) {
             /*
              * Invalid GIST syntax, return clean slide delimiter.
              */
+            log.warn("build: ex={}", ex);
             return mdm.extractDelim(md);
         }
 

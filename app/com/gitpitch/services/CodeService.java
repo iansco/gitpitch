@@ -84,7 +84,9 @@ public class CodeService {
                 return buildCodeBlockError(mdm.extractDelim(md), codePath);
             }
 
-        } catch (Exception gex) {}
+        } catch (Exception ex) {
+          log.warn("build: ex={}", ex);
+        }
         return codeBlock;
     }
 
