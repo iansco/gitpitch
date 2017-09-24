@@ -599,20 +599,8 @@ public class MarkdownModel implements Markdown {
       }
     }
 
-    public String extractImageDelim(String md) {
-        return isHorizontal(md) ? horizImageDelim() : vertImageDelim();
-    }
-
-    public String extractVideoDelim(String md) {
-        return isHorizontal(md) ? horizVideoDelim() : vertVideoDelim();
-    }
-
-    public String extractGISTDelim(String md) {
-        return isHorizontal(md) ? horizGISTDelim() : vertGISTDelim();
-    }
-
-    public String extractCodeDelim(String md) {
-        return isHorizontal(md) ? horizCodeDelim() : vertCodeDelim();
+    public String extractDelim(String md) {
+        return isHorizontal(md) ? horizDelim() : vertDelim();
     }
 
     /*

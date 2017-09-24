@@ -71,7 +71,7 @@ public class GISTService {
             String gid = dp.get(MarkdownModel.DELIM_QUERY_GIST);
 
             if(backCompat(gid)) {
-
+              log.debug("build: back-compat, gid={}", gid);
               return buildBackCompat(md, dp, pp, yOpts, mdm);
 
             } else {
@@ -79,17 +79,24 @@ public class GISTService {
               String fileHint = dp.get(MarkdownModel.DELIM_QUERY_FILE);
               String langHint = dp.get(MarkdownModel.DELIM_QUERY_LANG);
               String slideTitle = dp.get(MarkdownModel.DELIM_QUERY_TITLE);
-              String extractedDelim = mdm.extractGISTDelim(md);
+              String extractedDelim = mdm.extractDelim(md);
+
+              log.debug("build: fileHint={}, langHint={}, slideTitle={}",
+                      fileHint, langHint, slideTitle);
+              log.debug("build: extractedDelim={}", extractedDelim);
 
               GRS grs = grsManager.get(pp);
+              log.debug("build: grs={}", grs);
               GRSService grsService = grsManager.getService(grs);
               Path branchPath = diskService.ensure(pp);
+              log.debug("build: branchPath={}", branchPath);
               String gistLink = grsService.gist(pp, gid, fileHint);
               log.debug("build: generated gistLink={}", gistLink);
 
               int downStatus =
                   diskService.download(pp, branchPath, gistLink,
                                        GIST_CODE, grs.getHeaders());
+              log.debug("build: downStatus={}", downStatus);
 
               if(downStatus == 0) {
                   String code = diskService.asText(pp, GIST_CODE);
@@ -105,7 +112,7 @@ public class GISTService {
             /*
              * Invalid GIST syntax, return clean slide delimiter.
              */
-            return mdm.extractGISTDelim(md);
+            return mdm.extractDelim(md);
         }
 
     }
@@ -120,6 +127,10 @@ public class GISTService {
                                   String code,
                                   String langHint,
                                   String slideTitle) {
+
+        log.debug("buildCodeBlock: delim={}, langHint={}, slideTitle={}",
+                delim, langHint, slideTitle);
+        log.debug("buildCodeBlock: code=\n{}\n", code);
 
         StringBuffer slide =  new StringBuffer(delim)
                                   .append(MarkdownModel.MD_SPACER);
@@ -152,6 +163,9 @@ public class GISTService {
    private String buildCodeBlockError(String delim,
                                       String codePath,
                                       String fileHint) {
+
+        log.debug("buildCodeBlockError: delim={}, codePath={}, fileHint={}",
+                delim, codePath, fileHint);
 
         String filePath = fileHint != null ? fileHint : GIST_DEFAULT_FILE;
         filePath = "[ " + filePath + " ]";
@@ -223,7 +237,7 @@ public class GISTService {
             /*
              * Invalid GIST syntax, return clean slide delimiter.
              */
-            return mdm.extractGISTDelim(md);
+            return mdm.extractDelim(md);
         }
 
     }

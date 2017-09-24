@@ -62,7 +62,7 @@ public class CodeService {
                         YAMLOptions yOpts,
                         MarkdownModel mdm) {
 
-        String codeBlock = mdm.extractCodeDelim(md);
+        String codeBlock = mdm.extractDelim(md);
 
         try {
 
@@ -78,10 +78,10 @@ public class CodeService {
 
             if(downStatus == 0) {
                 String code = diskService.asText(pp, SOURCE_CODE);
-                return buildCodeBlock(mdm.extractCodeDelim(md),
+                return buildCodeBlock(mdm.extractDelim(md),
                                       code, langHint, slideTitle);
             } else {
-                return buildCodeBlockError(mdm.extractCodeDelim(md), codePath);
+                return buildCodeBlockError(mdm.extractDelim(md), codePath);
             }
 
         } catch (Exception gex) {}
