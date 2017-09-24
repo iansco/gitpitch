@@ -68,14 +68,9 @@ public class GISTService {
 
         try {
 
-            log.debug("build: md={}", md);
-            log.debug("build: pp={}", pp);
-            log.debug("build: dp={}", dp);
             String gid = dp.get(MarkdownModel.DELIM_QUERY_GIST);
-            log.debug("build: gid={}", gid);
 
             if(backCompat(gid)) {
-              log.debug("build: back-compat, gid={}", gid);
               return buildBackCompat(md, dp, pp, yOpts, mdm);
 
             } else {
@@ -85,22 +80,14 @@ public class GISTService {
               String slideTitle = dp.get(MarkdownModel.DELIM_QUERY_TITLE);
               String extractedDelim = mdm.extractDelim(md);
 
-              log.debug("build: fileHint={}, langHint={}, slideTitle={}",
-                      fileHint, langHint, slideTitle);
-              log.debug("build: extractedDelim={}", extractedDelim);
-
               GRS grs = grsManager.get(pp);
-              log.debug("build: grs={}", grs);
               GRSService grsService = grsManager.getService(grs);
               Path branchPath = diskService.ensure(pp);
-              log.debug("build: branchPath={}", branchPath);
               String gistLink = grsService.gist(pp, gid, fileHint);
-              log.debug("build: generated gistLink={}", gistLink);
 
               int downStatus =
                   diskService.download(pp, branchPath, gistLink,
                                        GIST_CODE, grs.getHeaders());
-              log.debug("build: downStatus={}", downStatus);
 
               if(downStatus == 0) {
                   String code = diskService.asText(pp, GIST_CODE);
@@ -135,7 +122,6 @@ public class GISTService {
 
         log.debug("buildCodeBlock: delim={}, langHint={}, slideTitle={}",
                 delim, langHint, slideTitle);
-        log.debug("buildCodeBlock: code=\n{}\n", code);
 
         StringBuffer slide =  new StringBuffer(delim)
                                   .append(MarkdownModel.MD_SPACER);
