@@ -29,6 +29,7 @@ import com.gitpitch.services.ImageService;
 import com.gitpitch.git.GRS;
 import com.gitpitch.git.GRSService;
 import com.gitpitch.git.GRSManager;
+import com.gitpitch.git.vendors.GitHub;
 import com.gitpitch.utils.PitchParams;
 import com.gitpitch.utils.DelimParams;
 import com.gitpitch.utils.YAMLOptions;
@@ -80,7 +81,11 @@ public class GISTService {
               String slideTitle = dp.get(MarkdownModel.DELIM_QUERY_TITLE);
               String extractedDelim = mdm.extractDelim(md);
 
-              GRS grs = grsManager.get(pp);
+              /*
+               * GIST is a GitHub specific service so override
+               * active-GRS to ensure communiction with GitHub.
+               */
+              GRS grs = grsManager.get(GitHub.TYPE);
               GRSService grsService = grsManager.getService(grs);
               Path branchPath = diskService.ensure(pp);
               String gistLink = grsService.gist(pp, gid, fileHint);
