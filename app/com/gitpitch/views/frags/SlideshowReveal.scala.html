@@ -39,27 +39,26 @@
             }
             @if(!(serverPrinting || webPrinting)) {
             menu: {
-              themes: [
-                { name: 'Black', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/black.css' },
-                { name: 'White', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/white.css' },
-                { name: 'Sky', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/sky.css' },
-                { name: 'Beige', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/beige.css' },
-                { name: 'Night', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/night.css' },
-                { name: 'Moon', theme: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/moon.css' }
-              ],
-              // themes : false,
               custom: [
                 @if(offline) {
-                { title: 'Home', active: true, icon: '<i class="fa fa-bookmark">', src: 'home.html' }
+                { title: 'Home', active: true,
+                  icon: '<i class="fa fa-bookmark">',
+                  src: 'home.html' }
                 } else {
-                { title: 'Home', active: true, icon: '<i class="fa fa-bookmark">', src: '@ssm.homePanel(offline)' },
-                { title: 'Themes', icon: '<i class="fa fa-code-fork">', src: '@ssm.gitPanel()' },
-                { title: 'GRS', icon: '<i class="fa fa-image">', src: '@ssm.themesPanel()' }
+                { title: 'Home', active: true,
+                  icon: '<i class="fa fa-bookmark">',
+                  src: '@ssm.homePanel()' },
+                { title: 'Themes',
+                  icon: '<i class="fa fa-code-fork">',
+                  src: '@ssm.gitPanel()' },
+                { title: 'GRS',
+                  icon: '<i class="fa fa-image">',
+                  src: '@ssm.themesPanel()' }
                 }
               ],
-              // custom: false,
+              path : "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/menu",
+              themes : false,
               transitions:  false,
-              sticky: false,
               autoOpen: false,
               markers: true,
               sticky: true,
@@ -68,35 +67,42 @@
             }
             dependencies: [
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/marked.js",
-                  condition: function() { return !!document.querySelector( '[data-markdown]' ); }},
+                  condition: function() {
+                    return !!document.querySelector( '[data-markdown]' );
+                  }},
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/markdown/markdown.js",
-                condition: function() { return !!document.querySelector( '[data-markdown]' ); }},
+                condition: function() {
+                  return !!document.querySelector( '[data-markdown]' );
+                }},
                 @if(!(serverPrinting || webPrinting)) {
-                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/menu/menu.js", async: true},
-                /*
-                { src: '@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/title-footer/title-footer.js',
-                  async: true, callback: function() { title_footer.initialize("@ssm.fetchFootnote()"); }},
-                */
+                { src:"@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/menu/menu-mod.js",
+                  async: true},
                 }
                 @if(ssm.chartsEnabled()) {
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/chart/Chart.min.js"},
                 { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/chart/csv2chart.js"},
                 }
                 @if(deps.cdnDisabled() || offline) {
-                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/notes/notes.js", async: true },
+                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/notes/notes.js",
+                  async: true },
                 }
                 @if(deps.highlightPluginEnabled()) {
-                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/highlight/highlight.js", async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/highlight/highlight.js",
+                  async: true, callback: function() {
+                    hljs.initHighlightingOnLoad();
+                  } },
                 } else {
                 { src: '@deps.highlightjs(offline)/highlight.js', async: true },
-                { src: '@deps.highlightjs(offline)/reveal-code-focus-1.0.0-mod.js', async: true,
+                { src: '@deps.highlightjs(offline)/reveal-code-focus-1.0.0-mod.js',
+                  async: true,
                   callback: function() {
                     RevealCodeFocus();
                   }
                 },
                 }
                 @if(ssm.mathEnabled()) {
-                    { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/math/math.js", async: true }
+                    { src: "@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/math/math.js",
+                      async: true }
                 }
             ]
         });

@@ -472,14 +472,14 @@ public class SlideshowModel {
         return _cacheKey;
     }
 
-    public String homePanel(Boolean offline) {
+    public String homePanel() {
         return com.gitpitch.controllers.routes.PitchController.home(_pp.grs,
                 _pp.user,
                 _pp.repo,
                 _pp.branch,
                 _pp.theme,
                 _pp.pitchme,
-                Boolean.toString(offline)).toString();
+                "false").toString();
     }
 
     public String gitPanel() {

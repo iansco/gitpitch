@@ -9,11 +9,11 @@ var RevealMenu = window.RevealMenu || (function(){
 	var options = config.menu || {};
 	options.path = options.path || scriptPath() || 'plugin/menu';
 	var initialised = false;
-	
+
 	var module = {};
 
-	loadResource(options.path + '/menu.css', 'stylesheet', function() {
-	loadResource(options.path + '/font-awesome-4.3.0/css/font-awesome.min.css', 'stylesheet', function() {
+	loadResource(options.path + '/menu-mod.css', 'stylesheet', function() {
+	// loadResource(options.path + '/font-awesome-4.3.0/css/font-awesome.min.css', 'stylesheet', function() {
 		// does not support IE8 or below
 		if (!head.browser.ie || head.browser.version >= 9) {
 			//
@@ -44,7 +44,7 @@ var RevealMenu = window.RevealMenu || (function(){
 				];
 			}
 			var transitions = options.transitions;
-			if (typeof transitions === "undefined") transitions = true;
+			if (typeof transitions === "undefined") transitions = false;
 			if (head.browser.ie && head.browser.version <= 9) {
 				// transitions aren't support in IE9 anyway, so no point in showing them
 				transitions = false;
@@ -61,7 +61,7 @@ var RevealMenu = window.RevealMenu || (function(){
 			if (typeof autoOpen === "undefined") autoOpen = true;
 			var delayInit = options.delayInit;
 			if (typeof delayInit === "undefined") delayInit = false;
-			
+
 
 			function disableMouseSelection() {
 				mouseSelectionEnabled = false;
@@ -95,7 +95,7 @@ var RevealMenu = window.RevealMenu || (function(){
 				var offsetFromTop = getOffset(el).top - el.offsetParent.offsetTop;
 				if (offsetFromTop < 0) return -offsetFromTop
 				var offsetFromBottom = el.offsetParent.offsetHeight - (el.offsetTop - el.offsetParent.scrollTop + el.offsetHeight);
-				if (offsetFromBottom < 0) return offsetFromBottom; 
+				if (offsetFromBottom < 0) return offsetFromBottom;
 				return 0;
 			}
 
@@ -104,20 +104,20 @@ var RevealMenu = window.RevealMenu || (function(){
 				if (offset) {
 					disableMouseSelection();
 					el.scrollIntoView(offset > 0);
-					reenableMouseSelection();	
+					reenableMouseSelection();
 				}
 			}
 
 			function scrollItemToTop(el) {
 				disableMouseSelection();
 				el.offsetParent.scrollTop = el.offsetTop;
-				reenableMouseSelection();	
+				reenableMouseSelection();
 			}
 
 			function scrollItemToBottom(el) {
 				disableMouseSelection();
 				el.offsetParent.scrollTop = el.offsetTop - el.offsetParent.offsetHeight + el.offsetHeight
-				reenableMouseSelection();	
+				reenableMouseSelection();
 			}
 
 			function selectItem(el) {
@@ -193,7 +193,7 @@ var RevealMenu = window.RevealMenu || (function(){
 						case 34: case 68:
 							var visibleItems = selectAll('.active-menu-panel .slide-menu-items li').filter(function(item) { return visibleOffset(item) == 0; });
 							var itemsBelow = selectAll('.active-menu-panel .slide-menu-items li').filter(function(item) { return visibleOffset(item) < 0; });
-							
+
 							var lastVisible = (itemsBelow.length > 0 && Math.abs(visibleOffset(itemsBelow[0])) < itemsBelow[0].clientHeight ? itemsBelow[0] : visibleItems[visibleItems.length-1]);
 							if (lastVisible) {
 								if (lastVisible.classList.contains('selected') && itemsBelow.length > 0) {
@@ -286,14 +286,14 @@ var RevealMenu = window.RevealMenu || (function(){
 				    select('.reveal').classList.add('has-' + options.effect + '-' + side);
 				    select('.slide-menu').classList.add('active');
 				    select('.slide-menu-overlay').classList.add('active');
-					
+
 				    // identify active theme
-				    selectAll('div[data-panel="Themes"] li').forEach(function(i) { i.classList.remove('active') });
-				    select('li[data-theme="' + select('#theme').getAttribute('href') + '"]').classList.add('active');
+				    // selectAll('div[data-panel="Themes"] li').forEach(function(i) { i.classList.remove('active') });
+				    // select('li[data-theme="' + select('#theme').getAttribute('href') + '"]').classList.add('active');
 
 				    // identify active transition
-				    selectAll('div[data-panel="Transitions"] li').forEach(function(i) { i.classList.remove('active') });
-				    select('li[data-transition="' + Reveal.getConfig().transition + '"]').classList.add('active');
+				    // selectAll('div[data-panel="Transitions"] li').forEach(function(i) { i.classList.remove('active') });
+				    // select('li[data-transition="' + Reveal.getConfig().transition + '"]').classList.add('active');
 
 				    // set item selections to match active items
 					var items = selectAll('.slide-menu-panel li.active')
@@ -306,7 +306,7 @@ var RevealMenu = window.RevealMenu || (function(){
 
 			function closeMenu(event, force) {
 				if (event) event.preventDefault();
-				if (!sticky || force) {
+				if (!sticky || force || event instanceof MouseEvent) {
 					select('body').classList.remove('slide-menu-active');
 					select('.reveal').classList.remove('has-' + options.effect + '-' + side);
 					select('.slide-menu').classList.remove('active');
@@ -356,7 +356,8 @@ var RevealMenu = window.RevealMenu || (function(){
 				var h = parseInt(item.getAttribute('data-slide-h'));
 				var v = parseInt(item.getAttribute('data-slide-v'));
 				var theme = item.getAttribute('data-theme');
-				var transition = item.getAttribute('data-transition');
+				// var transition = item.getAttribute('data-transition');
+				var transition = false;
 				if (!isNaN(h) && !isNaN(v)) {
 					Reveal.slide(h, v);
 					closeMenu();
@@ -413,7 +414,7 @@ var RevealMenu = window.RevealMenu || (function(){
 					top.appendChild(panels);
 					var overlay = create('div', { 'class': 'slide-menu-overlay'});
 					top.appendChild(overlay);
-					overlay.onclick = closeMenu;						
+					overlay.onclick = closeMenu;
 
 					var toolbar = create('ol', {'class': 'slide-menu-toolbar'});
 					select('.slide-menu').appendChild(toolbar);
@@ -425,38 +426,40 @@ var RevealMenu = window.RevealMenu || (function(){
 						};
 						if (ref) {
 							attrs['data-panel'] = ref;
-						}	
+						}
 						var button = create('li', attrs);
 
 						if (icon.startsWith('fa-')) {
 							button.appendChild(create('i', {'class': 'fa ' + icon}));
 						} else {
 							button.innerHTML = icon + '</i>';
-						}					
-						button.insertBefore(create('span', {'class': 'slide-menu-toolbar-label'}, title), select('i', button));
-						button.insertBefore(create('br'), select('i', button));
+						}
+						// button.insertBefore(create('span', {'class': 'slide-menu-toolbar-label'}, title), select('i', button));
+						// button.insertBefore(create('br'), select('i', button));
 						button.onclick = fn;
 						toolbar.appendChild(button);
 						return button;
 					}
 
-					addToolbarButton('Slides', 'Slides', 'fa-list', openPanel, true);
+					// addToolbarButton('Slides', 'Slides', 'fa-list', openPanel, true);
 
 					if (custom) {
 						custom.forEach(function(element, index, array) {
-							addToolbarButton(element.title, 'Custom' + index, element.icon, openPanel);
+							addToolbarButton(element.title, 'Custom' + index, element.icon, openPanel, element.active);
 						});
 					}
 
-					if (themes) {
-						addToolbarButton('Themes', 'Themes', 'fa-desktop', openPanel);
-					}
-					if (transitions) {
-						addToolbarButton('Transitions', 'Transitions', 'fa-arrows-h', openPanel);
-					}
+					addToolbarButton('Slides', 'Slides', 'fa-list', openPanel);
+
+					// if (themes) {
+						// addToolbarButton('Themes', 'Themes', 'fa-desktop', openPanel);
+					// }
+					// if (transitions) {
+						// addToolbarButton('Transitions', 'Transitions', 'fa-arrows-h', openPanel);
+					// }
 					button = create('li', {id: 'close'});
-					button.appendChild(create('span', {'class': 'slide-menu-toolbar-label'}, 'Close'));
-					button.appendChild(create('br'));
+					// button.appendChild(create('span', {'class': 'slide-menu-toolbar-label'}, 'Close'));
+					// button.appendChild(create('br'));
 					button.appendChild(create('i', {'class': 'fa fa-times'}));
 					button.onclick = closeMenu;
 					toolbar.appendChild(button);
@@ -545,7 +548,7 @@ var RevealMenu = window.RevealMenu || (function(){
 						}
 
 						item.appendChild(create('span', {class: 'slide-menu-item-title'}, title));
-						
+
 						return item;
 					}
 
@@ -553,8 +556,13 @@ var RevealMenu = window.RevealMenu || (function(){
 						if ( !document.querySelector('section[data-markdown]:not([data-markdown-parsed])') ) {
 							var panel = create('div', {
 								'data-panel': 'Slides',
-								'class': 'slide-menu-panel active-menu-panel'
+								// 'class': 'slide-menu-panel active-menu-panel'
+								'class': 'slide-menu-panel'
 							});
+
+							var menuTitle = create("div", {class: 'toc-title'}, '<span class="gp-gold">The</span> Slides');
+							panel.appendChild(menuTitle);
+
 							panel.appendChild(create('ul', {class: "slide-menu-items"}));
 							panels.appendChild(panel);
 							var items = select('.slide-menu-panel[data-panel="Slides"] > .slide-menu-items');
@@ -589,8 +597,8 @@ var RevealMenu = window.RevealMenu || (function(){
 						}
 					}
 
-					createSlideMenu();
-					Reveal.addEventListener('slidechanged', highlightCurrentSlide);
+					// createSlideMenu();
+					// Reveal.addEventListener('slidechanged', highlightCurrentSlide);
 
 					//
 					// Custom menu panels
@@ -624,7 +632,7 @@ var RevealMenu = window.RevealMenu || (function(){
 							});
 						}
 						function showErrorMsg(response) {
-							var msg = '<p>ERROR: The attempt to fetch ' + response.responseURL + ' failed with HTTP status ' + 
+							var msg = '<p>ERROR: The attempt to fetch ' + response.responseURL + ' failed with HTTP status ' +
 								response.status + ' (' + response.statusText + ').</p>' +
 								'<p>Remember that you need to serve the presentation HTML from a HTTP server.</p>';
 								response.panel.innerHTML = msg;
@@ -633,7 +641,8 @@ var RevealMenu = window.RevealMenu || (function(){
 						custom.forEach(function(element, index, array) {
 							var panel = create('div', {
 								'data-panel': 'Custom' + index,
-								class: 'slide-menu-panel slide-menu-custom-panel'
+								// class: 'slide-menu-panel slide-menu-custom-panel'
+								class: 'slide-menu-panel slide-menu-custom-panel' + (element.active ? ' active-menu-panel' : '')
 							});
 							if (element.content) {
 								panel.innerHTML = element.content;
@@ -645,6 +654,9 @@ var RevealMenu = window.RevealMenu || (function(){
 							panels.appendChild(panel);
 						})
 					}
+
+					createSlideMenu();
+					Reveal.addEventListener('slidechanged', highlightCurrentSlide);
 
 					//
 					// Themes
@@ -729,6 +741,18 @@ var RevealMenu = window.RevealMenu || (function(){
 						});
 					});
 				}
+
+				/*
+				 * The menu should only be opened by default on the main
+				 * presentation window.
+				 *
+				 * Receiver on window.location indicates the speaker-notes
+				 * window. The menu should be closed for this speaker window.
+				 */
+				if(!window.location.search.match(/receiver/gi)) {
+					openMenu();
+				}
+
 				initialised = true;
 			}
 
@@ -736,7 +760,7 @@ var RevealMenu = window.RevealMenu || (function(){
 			module.isOpen = isOpen;
 			module.init = init;
 			module.isInit = function() { return initialised };
-			
+
 			if (!delayInit) {
 				init();
 			}
@@ -770,7 +794,7 @@ var RevealMenu = window.RevealMenu || (function(){
 
 			dispatchEvent('menu-ready');
 		}
-	})
+	// })
 	});
 
 	function select(selector, el) {
