@@ -106,7 +106,7 @@ public class ShortcutsService {
             int codeFragNoteStart =
                 md.indexOf(MarkdownModel.MD_CODE_FRAG_NOTE_OPEN);
             int codeFragNoteEnd =
-                md.indexOf(MarkdownModel.MD_CODE_FRAG_NOTE_CLOSE);
+                md.lastIndexOf(MarkdownModel.MD_CODE_FRAG_NOTE_CLOSE);
 
             if(codeFragNoteEnd > codeFragNoteStart) {
                 codeFragNote =
@@ -135,7 +135,7 @@ public class ShortcutsService {
                 md.indexOf(MarkdownModel.MD_TITLE_HINT_OPEN) +
                     MarkdownModel.MD_TITLE_HINT_OPEN.length();
             int hintEnd =
-                md.indexOf(MarkdownModel.MD_TITLE_HINT_CLOSE);
+                md.lastIndexOf(MarkdownModel.MD_TITLE_HINT_CLOSE);
 
             if(hintEnd > hintStart) {
                 String hint = md.substring(hintStart, hintEnd);
