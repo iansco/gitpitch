@@ -13,25 +13,9 @@
 <html class="no-js"> <!--<![endif]-->
   <body>
   <div class="pitch-menu">
-
-    <!--
-    <img class="pitch-menu-logo"/>
-    -->
     <div class="pitch-menu-logo"></div>
-
-    <!--
     <br><br>
-
-    <div class="tagline-box">
-      <p>Markdown Presentations</p>
-      <p>for Everyone</p>
-    </div>
-    -->
-
-    <br><br>
-
     <div class="git-box">
-
       <div style="padding-top: 25px; padding-bottom: 10px;">
         <span class="git-octicon">
           <span class="octicon octicon-file-media">
@@ -40,10 +24,8 @@
           </span>
         </span>
       </div>
-
       <hr class="fade-away">
       <br>
-
       <ul class="slide-menu-items slide-menu-boxed">
         @for(theme <- rndr.listThemes()) {
           @if(theme == fixedTheme || (fixedTheme == null && theme == rndr.theme())) {
@@ -69,14 +51,9 @@
           }
         }
       </ul>
-
       <br><br>
-
-
     </div>
-
     <br><br><br>
-
     @if(fixedTheme != null) {
     <p style="letter-spacing: 0; font-family: 'Roboto', sans-serif;">
       <a href="https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings" style="text-decoration: none">
@@ -84,20 +61,15 @@
       </a>
       <br>Fixed theme in use.
     </p>
-
     } else {
     <p style="letter-spacing: 0; font-family: 'Roboto', sans-serif;">
-
       Use <a href="https://github.com/gitpitch/gitpitch/wiki" style="text-decoration: none">
         PITCHME.yaml
       </a> To
       <br>Customize Everything.
     </p>
     }
-
     <br>
-
   </div>
-
 </body>
 </html>
