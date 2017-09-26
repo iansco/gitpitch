@@ -561,8 +561,6 @@ var RevealMenu = window.RevealMenu || (function(){
 							});
 
 							var menuTitle = create("div", {class: 'toc-title'},
-								// '<img class="pitch-menu-logo logo-shifted"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
-								// '<div class="plogo"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
 								'<div class="pitch-menu-logo"></div><p style="color: white; padding: 50px 0 10px 0;"><i class="fa fa-list" style="padding-right: 5px"></i> Table of Contents</p><hr class="fade-away"><br><br>');
 							panel.appendChild(menuTitle);
 
