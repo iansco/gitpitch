@@ -29,7 +29,7 @@
 	display: block;
 	text-align: left;
 	padding: 10px 18px;
-	color: gray;
+	color: #b3b3b3;
 	cursor: pointer;
 }
 
@@ -48,7 +48,7 @@
 
 .reveal .active-menu-panel li.disabled-theme {
 	text-decoration: line-through;
-	opacity: 0.5;
+	opacity: 0.8;
 	color: white;
 	background-color: black;
 }
@@ -88,7 +88,7 @@
 
 .reveal .slide-menu-item i.fa,
 .reveal .slide-menu-item-vertical i.fa {
-	opacity: 0.4;
+	opacity: 1;
 }
 
 .reveal .slide-menu--left {
