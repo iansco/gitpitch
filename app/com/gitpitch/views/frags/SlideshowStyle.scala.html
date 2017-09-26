@@ -1,9 +1,7 @@
+@(offline: Boolean)
+
     <style>
-
-        /*
-         * GitPitch Styling.
-         */
-
+        /* GitPitch Styling */
         .centered {
             display: flex;
             justify-content: center;
@@ -11,89 +9,91 @@
             font-size:1.3em;
             font-weight: bold;
         }
-
-        /*
-         * GitPitch Reveal Core Styling Overrides.
-         */
-
+        /* GitPitch Reveal Core Styling Overrides */
         .reveal .speaker-notes {
             background-color: #2a76dd;
             opacity : 0.9;
         }
-
         .reveal .controls {
           bottom: 20px;
         }
-
         div.slide-number {
           color: inherit !important;
           opacity: 0.5;
         }
-
         .reveal .slide-number {
           bottom: 3px;
           color: gray !important;
           background-color: inherit;
         }
-
-        /*
-         * GitPitch Menu Styling.
-         */
-
+        /* GitPitch Menu Styling */
         div.pitch-menu {
           width: 100%;
           text-align: center;
           padding-top: 20px;
         }
-
+        img.pitch-menu-logo {
+          width: 200px;
+          height: 40px;
+          padding-top: 40px;
+          @if(offline) {
+          content:url(gp-logo.svg);
+          } else {
+          content:url(https://gitpitch.com/gp-logo.svg);
+          }
+        }
         div.pitch-menu .logo {
           color: white;
           font-size: 2.0em;
           font-weight: bold;
           letter-spacing: 2.0px;
         }
-
         div.pitch-menu .logo-git {
           color: #e48436;
         }
-
         div.pitch-menu .tagline-box {
           padding: 0px;
         }
-
         div.pitch-menu .tagline-box p {
           padding: 0px;
-          margin: 2px;
-          letter-spacing: 2px;
+          margin: 0px;
+          letter-spacing: 0;
+          font-size: 1.1em;
+          color: gray;
         }
-
         div.pitch-menu .tagline {
           color: gray;
         }
 
         div.pitch-menu div.section-heading {
+          display: none;
           color: white;
           font-size: 1.1em;
           letter-spacing: 2px;
           text-transform: uppercase;
           text-decoration: none;
         }
-
         div.pitch-menu .git-box {
-          border: 2px solid gray;
-          border-radius: 10px;
+          width: 90%;
+          margin: 0 auto;
+          border: 1px solid gray;
+          border-radius: 5px;
         }
-
+        div.git-box > table:first-of-type {
+          margin-left: 8%;
+        }
+        div.git-box, div.git-octicon, .git-octicon span  {
+          font-family: 'Roboto', sans-serif;
+        }
         div.pitch-menu .git-box .short-link {
           width: 8em;
           overflow: hidden;
           text-overflow: ellipsis;
+          font-family: 'Roboto', sans-serif;
         }
-
         div.pitch-menu .git-box a {
           text-decoration:none;
         }
-
         div.pitch-menu .git-box hr.fade-away {
             border: 1;
             border-color: gray;
@@ -101,74 +101,97 @@
             background-color: gray;
             width: 85%;
         }
-
         div.pitch-menu .git-box a a:hover {
           color: #e48436;
         }
-
         div.pitch-menu .git-box table th, div.pitch-menu table td {
           text-align: left;
-          padding: 1.0em 0.5em 1.0em 0.5em;
+          padding: 0.70em 0.4em 0.7em 0.4em;
           border: 0;
         }
-
         div.pitch-menu .git-label {
-          color: gray;
+	        color: #b3b3b3;
+          font-family: 'Roboto', sans-serif;
         }
-
         div.pitch-menu .git-octicon {
           font: normal normal normal 16px/1 octicons;
           font-size:1.1em;
           color: white;
         }
-
         div.pitch-menu .git-octicon .star-fork {
           padding-left: 4px;
           color: white;
         }
-
+        span.octicon.octicon-star, span.octicon.octicon-repo-forked {
+          color: #fff;
+        }
+        span.octicon span.star-fork {
+          font-family: 'Roboto', sans-serif;
+          font-size: 90%;
+        }
+        .git-octicon span.octicon {
+          font-family: octicons;
+          font-weight: bold !important;
+        }
         div.pitch-menu ul {
           list-style-type: none;
-          margin: 0px 0 0px 0;
+          margin: 5px 0 0px 0;
         }
-
         div.pitch-menu ul li.slideshow {
-          padding: 14px 0 13px 0;
           font-size: 0.95em;
-          # text-transform: capitalize;
-          letter-spacing: 1.5px;
-          text-align: left;
           cursor: pointer;
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 0;
         }
-
         div.pitch-menu ul li.home-git {
           padding: 14px 0 14px 0;
           font-size: 1.0em;
           letter-spacing: 1.5px;
           text-align: center;
         }
-
+        div.pitch-menu ul li.home-git a {
+          font-family: 'Roboto', sans-serif !important;
+        }
         div.pitch-menu ul li.home-themes {
           padding: 14px 0 14px 0;
           font-size: 1.0em;
           text-transform: capitalize;
           letter-spacing: 1.5px;
           text-align: center;
+          border-top: solid 1px #222;
         }
-
-        /*
-         * GitPitch Reveal Footer Plugin Styling Overrides.
-         */
-
+        div.pitch-menu ul li.home-themes a {
+          font-family: 'Roboto', sans-serif !important;
+        }
+        div.pitch-menu .git-box hr.fade-away {
+          border: 0;
+          height: 1px;
+          background: #999;
+          background-image: linear-gradient(to right, #666, #999, #666);
+          width: 80%;
+        }
+        div.pitch-menu ul i.fa.fa-download, div.pitch-menu ul i.fa.fa-print, div.pitch-menu ul i.fa.fa-external-link {
+          padding-right: 5px;
+        }
+        div.pitch-menu ul li.slideshow {
+          text-align: center;
+          padding: 10px 0;
+          letter-spacing: 0;
+        }
+        /* GitPitch Reveal Footer Plugin Styling Overrides */
         #title-footer div.footer-hard {
         }
-
         #title-footer p.footer-fade {
           opacity: 0.6;
           color: gray;
           font-size: 1.5vh;
-          letter-spacing: 1.5px;
+          letter-spacing: 0;
           padding-top: 1px;
         }
-
+        #title-footer #notification > span {
+          font-family: 'Roboto', sans-serif;
+          letter-spacing: 0;
+          font-size: 85%;
+        }
     </style>

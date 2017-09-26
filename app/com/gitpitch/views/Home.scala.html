@@ -16,34 +16,23 @@
   <body>
   <div class="pitch-menu">
 
-    <span class="logo padding"><span class="logo-git">Git</span>Pitch</span>
-
-    <!--
-    <img src="https://gitpitch.com/gp-logo.svg" width="200px" height="40px"/>
-    -->
+    <img class="pitch-menu-logo"/>
 
     <br><br>
 
     <div class="tagline-box">
-      <p><span style="font-size: 1.1em; color: gray;">Markdown Presentations</span></p>
-      <p><span style="font-size: 1.1em; color: gray;">for Everyone</span></p>
+      <p>Markdown Presentations</p>
+      <p>for Everyone</span></p>
     </div>
 
-    <br><br>
-    <div class="section-heading">Presenting</div>
-
-    <br>
-
+    <br><br><br>
 
     <div class="git-box">
 
       <div style="padding-top: 25px; padding-bottom: 10px;">
         <span class="git-octicon">
-          <!--
-          <span class="octicon octicon-mark-github"></span>
-          -->
           @Html(rndr.getGRSIcon(rndr.params()))
-          <span style="text-transform: uppercase; color: gray; padding-left: 5px;">
+          <span style="padding-left: 5px;">
             @rndr.getGRS(rndr.params()) Slideshow
           </span>
         </span>
@@ -54,19 +43,27 @@
       <table>
         <tr>
           <td class="git-label">User:</td>
-          <td><a href="@rndr.orgHub()"><div class="short-link">@rndr.user()</div></a></td>
+          <td><a href="@rndr.orgHub()">
+            <div class="short-link">@rndr.user()</div>
+          </a></td>
         </tr>
         <tr>
           <td class="git-label">Repo:</td>
-          <td><a href="@rndr.repoHub()"><div class="short-link">@rndr.repo()</div></a></td>
+          <td><a href="@rndr.repoHub()">
+            <div class="short-link">@rndr.repo()</div>
+          </a></td>
         </tr>
         <tr>
           <td class="git-label">Branch:</td>
-          <td><a href="@rndr.branchHub(rndr.params())"><div class="short-link">@rndr.branch()</div></a></td>
+          <td><a href="@rndr.branchHub(rndr.params())">
+            <div class="short-link">@rndr.branch()</div>
+          </a></td>
         </tr>
         <tr>
           <td class="git-label">Markdown:</td>
-          <td><a href="@rndr.pitchHub(rndr.params())"><div class="short-link">PITCHME.md</div></a></td>
+          <td><a href="@rndr.pitchHub(rndr.params())">
+            <div class="short-link">PITCHME.md</div>
+          </a></td>
         </tr>
       </table>
 
@@ -91,24 +88,25 @@
 
       <hr class="fade-away">
 
-      @if(offline) {
-      <br>
-      <p style="letter-spacing: 2px">
-        Promote, Pitch, Or Present
-        <br>
-        Absolutely Anything ;-)
-      </p>
-    } else {
+      @if(!offline) {
       <ul>
-        <li class="slideshow" title="Download GitPitch presentation for offline use.">
+        <li class="slideshow"
+            title="Download GitPitch presentation for offline use.">
           <a href="@rndr.offlineLink()" target="_blank">
           <i class="fa fa-download" aria-hidden="true">
-          </i> Download Presentation</a>
+          </i> Offline Version (.zip)</a>
         </li>
-        <li class="slideshow" title="Print GitPitch presentation as PDF document.">
+        <li class="slideshow"
+            title="Print GitPitch presentation as PDF document.">
           <a href="@rndr.printLink()" target="_blank">
-          <i class="fa fa-print" aria-hidden="true">
-          </i> Print PDF Presentation</a>
+          <i class="fa fa-external-link" aria-hidden="true">
+          </i> Print Version (.pdf)</a>
+        </li>
+        <li class="slideshow"
+            title="Share link to GitPitch presentation on Twitter.">
+          <a href="@rndr.tweetLink()" target="_blank">
+          <i class="fa fa-twitter" aria-hidden="true">
+          </i> Share Link on Twitter</a>
         </li>
       </ul>
       }
@@ -116,6 +114,13 @@
       <br><br>
 
     </div>
+
+    <br><br><br>
+    <p style="letter-spacing: 0; font-family: 'Roboto', sans-serif;">
+      Promote, Pitch, Or Present
+      <br>
+      Absolutely Anything.
+    </p>
 
     <br>
 

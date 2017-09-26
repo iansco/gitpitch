@@ -27,8 +27,11 @@
     <link href="@deps.highlightjs(offline)/@ssm.fetchHighlightCSS()" rel="stylesheet" type="text/css"/>
     <link href="@deps.octicons(offline)/octicons.css" rel="stylesheet" type="text/css"/>
     <link href="@deps.fontawesome(offline)/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    @if(!offline) {
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    }
 
-    @SlideshowStyle()
+    @SlideshowStyle(offline)
     @SlideshowCodeFragHighlightStyle()
     @if(ssm.hasThemeOverride()) {
     <style>

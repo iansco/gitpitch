@@ -547,7 +547,7 @@ public class SlideshowModel {
             });
 
     private static final String HELP =
-        "<span style='color: gray; letter-spacing: 1.5px'>" +
+        "<span style='color: gray; letter-spacing: 0'>" +
         "Navigate : Space / Arrow Keys | " +
         "<a href='#' onclick='RevealMenu.toggle()'>M</a> - Menu | " +
         "<a href='#' onclick='enterFullscreen()'>F</a> - Fullscreen | " +

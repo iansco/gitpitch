@@ -14,24 +14,27 @@
   <body>
   <div class="pitch-menu">
 
-    <span class="logo padding"><span class="logo-git">Git</span> Styled</span>
+    <img class="pitch-menu-logo"/>
 
     <br><br>
 
     <div class="tagline-box">
-      <p><span style="font-size: 1.1em; color: gray;">Markdown Presentations</span></p>
-      <p><span style="font-size: 1.1em; color: gray;">for Everyone</span></p>
+      <p>Markdown Presentations</p>
+      <p>for Everyone</p>
     </div>
 
-    <br><br>
-    <div class="section-heading">Theme Switcher</div>
-
-    <br>
-
+    <br><br><br>
 
     <div class="git-box">
 
-      <div style="padding-top: 25px; padding-bottom: 10px;"><span class="git-octicon"><span class="octicon octicon-heart"></span><span style="text-transform: uppercase; color: gray; padding-left: 15px;">Slide With Style</span></div>
+      <div style="padding-top: 25px; padding-bottom: 10px;">
+        <span class="git-octicon">
+          <span class="octicon octicon-file-media">
+          <span style="padding-left: 5px;">
+            Choose Look'n Feel
+          </span>
+        </span>
+      </div>
 
       <hr class="fade-away">
       <br>
@@ -64,24 +67,28 @@
 
       <br><br>
 
-      <hr class="fade-away">
-
-      <br>
-      @if(fixedTheme != null) {
-      <p style="letter-spacing: 2px">
-        <a href="https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings">PITCHME.yaml</a>
-        <br>Fixed theme in use.
-      </p>
-
-      } else {
-      <p style="letter-spacing: 2px">
-        Use <a href="https://github.com/gitpitch/gitpitch/wiki">PITCHME.yaml</a> To
-        <br>Customize Everything ;-)
-      </p>
-      }
-      <br><br>
 
     </div>
+
+    <br><br><br>
+
+    @if(fixedTheme != null) {
+    <p style="letter-spacing: 0; font-family: 'Roboto', sans-serif;">
+      <a href="https://github.com/gitpitch/gitpitch/wiki/Slideshow-Settings" style="text-decoration: none">
+        PITCHME.yaml
+      </a>
+      <br>Fixed theme in use.
+    </p>
+
+    } else {
+    <p style="letter-spacing: 0; font-family: 'Roboto', sans-serif;">
+
+      Use <a href="https://github.com/gitpitch/gitpitch/wiki" style="text-decoration: none">
+        PITCHME.yaml
+      </a> To
+      <br>Customize Everything.
+    </p>
+    }
 
     <br>
 

@@ -554,13 +554,14 @@ var RevealMenu = window.RevealMenu || (function(){
 
 					function createSlideMenu() {
 						if ( !document.querySelector('section[data-markdown]:not([data-markdown-parsed])') ) {
+
 							var panel = create('div', {
 								'data-panel': 'Slides',
-								// 'class': 'slide-menu-panel active-menu-panel'
 								'class': 'slide-menu-panel'
 							});
 
-							var menuTitle = create("div", {class: 'toc-title'}, '<span class="gp-gold">The</span> Slides');
+							var menuTitle = create("div", {class: 'toc-title'},
+								'<img class="pitch-menu-logo logo-shifted"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
 							panel.appendChild(menuTitle);
 
 							panel.appendChild(create('ul', {class: "slide-menu-items"}));

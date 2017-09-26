@@ -20,7 +20,8 @@
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	border-bottom: solid 1px #555;
+	border-bottom: solid 1px #222;
+	font-family: 'Roboto', sans-serif;
 }
 
 .reveal .slide-menu-item,
@@ -36,10 +37,6 @@
 	padding-left: 30px;
 }
 
-.reveal .slide-menu-item {
-  border-top: solid 1px #555;
-}
-
 .reveal .active-menu-panel li.selected {
 	background-color: #222;
 	color: white;
@@ -51,7 +48,7 @@
 
 .reveal .active-menu-panel li.disabled-theme {
 	text-decoration: line-through;
-	opacity: 0.3;
+	opacity: 0.5;
 	color: white;
 	background-color: black;
 }
@@ -163,7 +160,9 @@
  */
 .reveal .slide-menu-panel {
 	position: absolute;
-	width: 100%;
+	width: calc(100% - 20px);
+	padding-left: 10px;
+	padding-right: 10px;
 	visibility: hidden;
 	height: calc(100% - 60px);
 	overflow-x: hidden;
@@ -222,7 +221,7 @@
 
 .reveal .slide-menu-item a {
 	text-decoration: none;
-	font-family: "Open Sans", sans-serif !important;
+	font-family: 'Roboto', sans-serif;
 }
 
 .reveal .slide-menu-custom-panel {
@@ -296,14 +295,28 @@
  * Custom Panel Table-of-Contents (TOC) Title
  */
 div.toc-title {
-	color: white;
-	font-size: 2.0em;
-	font-weight: bold;
+	color: gray;
+	font-size: 1.1em;
 	text-align: center;
-	letter-spacing: 2.0px;
-	padding: 20px 5px 20px 2px;
+	padding: 0px;
+	padding-top: 20px;
+	margin: 0px;
 }
 
-div.toc-title .gp-gold {
-	color: #e48436;
+div.tagline-box {
+	padding-top: 16px;
+	margin: 0;
+}
+
+div.tagline-box p {
+	padding: 0px;
+	margin: 0 !important;
+	letter-spacing: 0;
+	font-size: 1em;
+	color: gray;
+}
+
+img.logo-shifted {
+	position: relative;
+	left: -2px;
 }

@@ -505,6 +505,17 @@ public class GitRepoRenderer {
                 _pp.notes).toString();
     }
 
+    public String tweetLink() {
+
+      return new StringBuffer("http://twitter.com/share?text=")
+                  .append("GitPitch presentation...")
+                  .append("&url=")
+                  .append(pageLink(true, null))
+                  .append("&hashtags=gitpitch")
+                  .toString();
+
+    }
+
     public String pageEmbed() {
 
         return new StringBuffer(EMBED_OPEN)
