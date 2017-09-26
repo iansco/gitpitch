@@ -1,7 +1,6 @@
 @(ssm: com.gitpitch.models.SlideshowModel, deps: com.gitpitch.policies.Dependencies, offline:Boolean, serverPrinting: Boolean, webPrinting: Boolean)
 
     <script>
-        console.log("slideshowreveal.scala: about to Reveal.initialize")
         Reveal.initialize({
             controls: true,
             progress: true,
@@ -106,7 +105,6 @@
                 }
             ]
         });
-        console.log("slideshowreveal.scala: after Reveal.initialize")
 
         Reveal.addEventListener('ready', function(evt) {
           if (evt.indexh === 0 && evt.indexv === 0) {

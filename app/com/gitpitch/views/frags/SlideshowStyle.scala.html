@@ -30,7 +30,18 @@
         div.pitch-menu {
           width: 100%;
           text-align: center;
-          padding-top: 20px;
+          padding-top: 40px;
+        }
+        div.pitch-menu-logo {
+          height: 90px;
+          margin: 0 auto;
+          background-size: 280px 90px;
+          background-repeat: no-repeat;
+          @if(offline) {
+          background-image: url(gp-logo-tagline.svg);
+          } else {
+          background-image: url(https://gitpitch.com/gp-logo-tagline.svg);
+          }
         }
         img.pitch-menu-logo {
           width: 200px;

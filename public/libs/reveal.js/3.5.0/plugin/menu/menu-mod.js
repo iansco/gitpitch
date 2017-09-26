@@ -561,7 +561,9 @@ var RevealMenu = window.RevealMenu || (function(){
 							});
 
 							var menuTitle = create("div", {class: 'toc-title'},
-								'<img class="pitch-menu-logo logo-shifted"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
+								// '<img class="pitch-menu-logo logo-shifted"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
+								// '<div class="plogo"/><div class="tagline-box"><p>Table of Contents</p></p></div><br><br><br>');
+								'<div class="pitch-menu-logo"></div> <br><br>');
 							panel.appendChild(menuTitle);
 
 							panel.appendChild(create('ul', {class: "slide-menu-items"}));
