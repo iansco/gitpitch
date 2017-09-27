@@ -83,31 +83,6 @@ public class PitchController extends Controller {
         this.gaToken = cfg.getString("gitpitch.google.analytics.token");
     }
 
-    public Result test() {
-
-        log.debug("test: begins.");
-
-        try {
-
-            if(env.isDev()) {
-
-                log.debug("test: isDev.");
-                File libsDir = env.getFile("public/libs");
-                log.debug("test: isDev, libs exists={}", libsDir.exists());
-
-            } else
-            if(env.isProd()) {
-
-                log.debug("test: isProd.");
-
-            }
-
-        } catch(Exception tex) {
-            log.warn("test: text={}", tex);
-        }
-        return ok("Test Completed");
-    }
-
     /*
      * Catchall redirects any URL with a trailing slash to the
      * URL minus the trailing slash. Any remaining unhandled URLs
@@ -118,7 +93,8 @@ public class PitchController extends Controller {
             if (path != "/" && path.endsWith("/")) {
                 return redirect("/" + path.substring(0, path.length()-1));
             } else {
-                return redirect("/");
+                // return redirect("/");
+                return ok(com.gitpitch.views.html.NotFound.render());
             }
         } catch(Exception ex) {
             return redirect("/");
@@ -126,18 +102,18 @@ public class PitchController extends Controller {
     }
 
     /*
-     * Landing builds and renders a GitPitch repo landing page.
+     * Presentation builds and renders a GitPitch presentation.
      */
-    public CompletionStage<Result> landing(String user,
-                                           String repo,
-                                           String branch,
-                                           String grs,
-                                           String theme,
-                                           String pitchme,
-                                           String notes,
-                                           String offline,
-                                           String fragments,
-                                           String webprint) {
+    public CompletionStage<Result> slideshow(String user,
+                                             String repo,
+                                             String branch,
+                                             String grs,
+                                             String theme,
+                                             String pitchme,
+                                             String notes,
+                                             String offline,
+                                             String fragments,
+                                             String webprint) {
 
         PitchParams pp =
             PitchParams.build(grsOnCall(grs),
@@ -152,15 +128,12 @@ public class PitchController extends Controller {
         Optional<GitRepoModel> grmo = pitchService.cachedRepo(pp);
         Optional<SlideshowModel> ssmo = pitchService.cachedYAML(pp);
 
-        log.debug("landing: pp={}", pp);
-        log.debug("landing: pitchme={}, offline={}, serverPrinting={}, webPrinting={}", pitchme, isOffline, serverPrinting, webPrinting);
-
         if (grmo.isPresent() && ssmo.isPresent()) {
 
             if (isOffline)
-                log.info("landing:   [ cached, offlne ] {}", pp);
+                log.info("slideshow:   [ cached, offlne ] {}", pp);
             else
-                log.info("landing:   [ cached, online ] {}", pp);
+                log.info("slideshow:   [ cached, online ] {}", pp);
 
             GitRepoModel grm = grmo.get();
             GitRepoRenderer rndr =
@@ -191,17 +164,15 @@ public class PitchController extends Controller {
 
                         if (rndr.isValid()) {
                             if (isOffline)
-                                log.info("landing:   [ fetchd, offlne ] {}", pp);
+                                log.info("slideshow:   [ fetchd, offlne ] {}", pp);
                             else
-                                log.info("landing:   [ fetchd, online ] {}", pp);
+                                log.info("slideshow:   [ fetchd, online ] {}", pp);
                         } else {
                             if (isOffline)
-                                log.info("landing:   [ notfnd, offlne ] {}", pp);
+                                log.info("slideshow:   [ notfnd, offlne ] {}", pp);
                             else
-                                log.info("landing:   [ notfnd, online ] {}", pp);
+                                log.info("slideshow:   [ notfnd, online ] {}", pp);
                         }
-
-                        // Optional<SlideshowModel> ssmo = pitchService.cachedYAML(pp);
 
                         if (ssmo.isPresent()) {
 
@@ -218,9 +189,6 @@ public class PitchController extends Controller {
                              * changes on the current PitchParams, such as {theme}.
                              */
                             ssm = ssm.clone(pp);
-                            // return CompletableFuture.completedFuture(
-                                    // ok(com.gitpitch.views.html.Slideshow.render(ssm,
-                                            // deps, webPrinting, isOffline, webPrinting)));
                             return ok(com.gitpitch.views.html.Slideshow.render(ssm,
                                             deps, isOffline, serverPrinting, webPrinting));
 
@@ -239,74 +207,6 @@ public class PitchController extends Controller {
                                     deps, isOffline, serverPrinting, webPrinting));
                         }
 
-                  });
-      }
-
-  } // landing action
-
-  /*
-   * Slideshow builds and renders a GitPitch slideshow page.
-   */
-  public CompletionStage<Result> slideshow(String grs,
-                                           String user,
-                                           String repo,
-                                           String branch,
-                                           String theme,
-                                           String pitchme,
-                                           String notes,
-                                           String fragments,
-                                           String offline,
-                                           String webprint) {
-
-      PitchParams pp =
-          PitchParams.build(grsOnCall(grs),
-                  user, repo, branch, theme, pitchme, notes);
-      boolean printing =
-              (fragments == null) ? false : !Boolean.parseBoolean(fragments);
-      boolean isOffline =
-              (offline == null) ? false : Boolean.parseBoolean(offline);
-      boolean webPrinting =
-              (webprint == null) ? false : Boolean.parseBoolean(webprint);
-
-      Optional<SlideshowModel> ssmo = pitchService.cachedYAML(pp);
-
-      if (ssmo.isPresent()) {
-
-          if (printing)
-              log.info("slideshow: [ cached, printg ] {}", pp);
-          else if (isOffline)
-              log.info("slideshow: [ cached, offlne ] {}", pp);
-          else
-              log.info("slideshow: [ cached, online ] {}", pp);
-
-          SlideshowModel ssm = ssmo.get();
-          /*
-           * Clone cached SlideshowModel in order to adjust for any
-           * changes on the current PitchParams, such as {theme}.
-           */
-          ssm = ssm.clone(pp);
-          return CompletableFuture.completedFuture(
-                  ok(com.gitpitch.views.html.Slideshow.render(ssm,
-                          deps, printing, isOffline, webPrinting)));
-
-      } else {
-
-          return CompletableFuture.supplyAsync(() -> {
-
-              return pitchService.fetchYAML(pp);
-
-          }, frontEndThreads.POOL)
-                  .thenApply(fetched -> {
-
-                      if (printing)
-                          log.info("slideshow: [ fetchd, printg ] {}", pp);
-                      if (isOffline)
-                          log.info("slideshow: [ fetchd, offlne ] {}", pp);
-                      else
-                          log.info("slideshow: [ fetchd, online ] {}", pp);
-
-                      return ok(com.gitpitch.views.html.Slideshow.render(fetched,
-                              deps, printing, isOffline, webPrinting));
                   });
       }
 

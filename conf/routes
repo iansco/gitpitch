@@ -35,14 +35,11 @@ GET     /pitchme/offline/:grs/:user/:repo/:b/:t/PITCHME.zip    com.gitpitch.cont
 # Serve PITCHME.md markdown.
 GET     /pitchme/markdown/:grs/:user/:repo/:b/PITCHME.md     com.gitpitch.controllers.PitchController.markdown(grs:String, user:String, repo:String, b:String, p:String ?= null)
 
-# Serve PITCHME.md slideshow.
-GET     /pitchme/slideshow/:grs/:user/:repo/:b   com.gitpitch.controllers.PitchController.slideshow(grs:String, user:String, repo:String, b:String, t:String ?= null, p:String ?= null, n:String ?= null, offline:String ?= null, fragments:String ?= null, `print-pdf`:String ?= null)
+# Serve PITCHME.md presentation page.
+GET     /:user/:repo/:b     com.gitpitch.controllers.PitchController.slideshow(user:String, repo:String, b:String, grs:String ?= null, t:String ?= null, p:String?= null, n:String ?= null, offline:String ?= null, fragments:String ?= null, `print-pdf`:String ?= null)
 
-# Serve PITCHME.md landing page.
-GET     /:user/:repo/:b     com.gitpitch.controllers.PitchController.landing(user:String, repo:String, b:String, grs:String ?= null, t:String ?= null, p:String?= null, n:String ?= null, offline:String ?= null, fragments:String ?= null, `print-pdf`:String ?= null)
-
-# Serve PITCHME.md landing page, short URI format.
-GET     /:user/:repo    com.gitpitch.controllers.PitchController.landing(user:String, repo:String, b:String ?= null, grs:String ?= null, t:String ?= null, p:String?= null, n:String ?= null, offline:String ?= null, fragments:String ?= null, `print-pdf`:String ?= null)
+# Serve PITCHME.md presentation page, short URI format.
+GET     /:user/:repo    com.gitpitch.controllers.PitchController.slideshow(user:String, repo:String, b:String ?= null, grs:String ?= null, t:String ?= null, p:String?= null, n:String ?= null, offline:String ?= null, fragments:String ?= null, `print-pdf`:String ?= null)
 
 # Catch-all route redirect to website.
 GET     /*path          com.gitpitch.controllers.PitchController.catchall(path:String)

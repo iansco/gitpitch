@@ -30,7 +30,7 @@ import play.Logger.ALogger;
 import java.util.*;
 
 /*
- * Rendering model for views.Landing.scala.html.
+ * Rendering model for views.Slideshow.scala.html.
  */
 public abstract class GitRepoModel {
 

@@ -193,7 +193,7 @@ public class OfflineService {
                 status = processMarkdown(pp, zipRoot, ssmo);
 
             if (status == STATUS_OK)
-                status = fetchLandingHTML(pp, zipRoot);
+                status = fetchSlideshowHTML(pp, zipRoot);
 
             if (status == STATUS_OK)
                 status = fetchHomeHTML(pp, zipRoot);
@@ -251,20 +251,20 @@ public class OfflineService {
                         pp.pitchme)
                         .absoluteURL(isEncrypted(), hostname());
 
-        Path zipMdPath =
-                diskService.ensure(zipRoot.resolve(ZIP_MD_DIR));
-        return diskService.download(pp,
-                zipMdPath, murl, PITCHME_ONLINE_MD,
-                grsManager.get(pp).getHeaders());
-    }
+      Path zipMdPath =
+              diskService.ensure(zipRoot.resolve(ZIP_MD_DIR));
+      return diskService.download(pp,
+              zipMdPath, murl, PITCHME_ONLINE_MD,
+              grsManager.get(pp).getHeaders());
+  }
 
-    /*
-     * Fetch Landing.html.
-     */
-    private int fetchLandingHTML(PitchParams pp, Path zipRoot) {
+  /*
+   * Fetch Presentation.html.
+   */
+  private int fetchSlideshowHTML(PitchParams pp, Path zipRoot) {
 
-        String lurl =
-                com.gitpitch.controllers.routes.PitchController.landing(pp.user,
+      String lurl =
+          com.gitpitch.controllers.routes.PitchController.slideshow(pp.user,
                         pp.repo,
                         pp.branch,
                         pp.grs,
@@ -276,28 +276,6 @@ public class OfflineService {
 
         return diskService.download(pp, zipRoot,
                 lurl, INDEX_HTML, grsManager.get(pp).getHeaders());
-    }
-
-    /*
-     * Fetch Slideshow.html.
-     */
-    private int fetchSlideshowHTML(PitchParams pp, Path zipRoot) {
-
-        String surl =
-                com.gitpitch.controllers.routes.PitchController.slideshow(pp.grs,
-                        pp.user,
-                        pp.repo,
-                        pp.branch,
-                        pp.theme,
-                        pp.pitchme,
-                        pp.notes,
-                        ENABLED,
-                        ENABLED,
-                        null)
-                        .absoluteURL(isEncrypted(), hostname());
-
-        return diskService.download(pp, zipRoot,
-                surl, SLIDESHOW_HTML, grsManager.get(pp).getHeaders());
     }
 
     /*

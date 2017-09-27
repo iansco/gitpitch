@@ -409,7 +409,8 @@ var RevealMenu = window.RevealMenu || (function(){
 			var buttons = 0;
 			function init() {
 				if (!initialised) {
-					var top = select('.reveal');
+					// var top = select('.reveal');
+					var top = select('.gp-menu');
 					var panels = create('nav', { 'class': 'slide-menu slide-menu--' + side});
 					top.appendChild(panels);
 					var overlay = create('div', { 'class': 'slide-menu-overlay'});
@@ -561,7 +562,7 @@ var RevealMenu = window.RevealMenu || (function(){
 							});
 
 							var menuTitle = create("div", {class: 'toc-title'},
-								'<div class="pitch-menu-logo"></div><p style="color: white; padding: 50px 0 10px 0;"><i class="fa fa-list" style="padding-right: 5px"></i> Table of Contents</p><hr class="fade-away"><br><br>');
+								'<div class="pitch-menu-logo"></div><p style="color: white; padding: 50px 0 10px 0;"><i class="fa fa-list" style="padding-right: 5px"></i> Table of Contents</p><hr class="fade-away">');
 							panel.appendChild(menuTitle);
 
 							panel.appendChild(create('ul', {class: "slide-menu-items"}));
@@ -709,10 +710,11 @@ var RevealMenu = window.RevealMenu || (function(){
 					if (openButton) {
 						// add menu button
 						var div = create('div', {class: 'slide-menu-button'});
-						var link = create('a', {href: '#'});
-						link.appendChild(create('i', {class: 'fa fa-bars'}));
+						var link = create('a', {class: 'reveal', href: '#'});
+						link.appendChild(create('i', {class: 'gp-menu-bars fa fa-bars'}));
 						div.appendChild(link);
-						select('.reveal').appendChild(div);
+						// select('.reveal').appendChild(div);
+						select('.gp-menu').appendChild(div);
 						div.onclick = openMenu;
 					}
 

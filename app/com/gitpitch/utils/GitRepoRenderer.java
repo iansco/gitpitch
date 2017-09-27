@@ -36,7 +36,7 @@ import play.Logger;
 import play.Logger.ALogger;
 
 /*
- * Rendering model for views.Landing.scala.html.
+ * Rendering model for views.Presentation.html.
  */
 public class GitRepoRenderer {
 
@@ -49,8 +49,7 @@ public class GitRepoRenderer {
     /*
      * Relative URLs for view components.
      */
-    private String _landingBase;
-    private String _landingURL;
+    private String _slideshowBase;
     private String _slideshowURL;
     private String _markdownURL;
     /*
@@ -82,30 +81,22 @@ public class GitRepoRenderer {
              * data returned on GitHub API as GitRepoModel, if exists.
              */
 
-            this._landingURL = com.gitpitch.controllers.routes.PitchController
-                    .landing(_grm.owner(),
-                            _grm.name(),
-                            _pp.branch,
-                            _pp.grs,
-                            _pp.theme,
-                            _pp.pitchme,
-                            _pp.notes, null, null, null).toString();
-
-            this._slideshowURL = com.gitpitch.controllers.routes.PitchController
-                    .slideshow(_pp.grs,
-                            _grm.owner(),
-                            _grm.name(),
-                            _pp.branch,
-                            _pp.theme,
-                            _pp.pitchme,
-                            _pp.notes, null, null, null).toString();
+            this._slideshowURL =
+                com.gitpitch.controllers.routes.PitchController
+                    .slideshow(_grm.owner(),
+                    _grm.name(),
+                    _pp.branch,
+                    _pp.grs,
+                    _pp.theme,
+                    _pp.pitchme,
+                    _pp.notes, null, null, null).toString();
 
             this._markdownURL = com.gitpitch.controllers.routes.PitchController
                     .markdown(_pp.grs,
-                            _grm.owner(),
-                            _grm.name(),
-                            _pp.branch,
-                            _pp.pitchme).toString();
+                    _grm.owner(),
+                    _grm.name(),
+                    _pp.branch,
+                    _pp.pitchme).toString();
 
             Optional<GRS> grso =
                     this._grsServices.stream()
@@ -182,8 +173,7 @@ public class GitRepoRenderer {
              * repository data is not available.
              */
 
-            this._landingBase = HTTP_HASH;
-            this._landingURL = HTTP_HASH;
+            this._slideshowBase = HTTP_HASH;
             this._slideshowURL = HTTP_HASH;
             this._orgHub = HTTP_HASH;
             this._repoHub = HTTP_HASH;
@@ -271,17 +261,18 @@ public class GitRepoRenderer {
     }
 
     /*
-     * Return relative URL to landing view.
+     * Return relative URL to slideshow.
      */
-    public String landingURL() {
-        return _landingURL;
+    public String slideshowURL() {
+        return _slideshowURL;
     }
 
     /*
-     * Return relative URL to landing view.
+     * Return relative URL to slideshow.
      */
-    public String landingURL(String theme) {
-        return com.gitpitch.controllers.routes.PitchController.landing(_grm.owner(),
+    public String slideshowURL(String theme) {
+        return com.gitpitch.controllers.routes.PitchController
+                .slideshow(_grm.owner(),
                 _grm.name(),
                 _pp.branch,
                 _pp.grs,
@@ -291,11 +282,12 @@ public class GitRepoRenderer {
     }
 
     /*
-     * Return relative URL to landing view.
+     * Return absolute URL to slideshow.
      */
-    public String landingAbs() {
+    public String slideshowAbs() {
 
-        return com.gitpitch.controllers.routes.PitchController.landing(_pp.user,
+        return com.gitpitch.controllers.routes.PitchController
+                .slideshow(_pp.user,
                 _pp.repo,
                 _pp.branch,
                 _pp.grs,
@@ -303,13 +295,6 @@ public class GitRepoRenderer {
                 _pp.pitchme,
                 _pp.notes, null, null, null).absoluteURL(isEncrypted(),
                             hostname());
-    }
-
-    /*
-     * Return relative URL to slideshow view.
-     */
-    public String slideshowURL() {
-        return _slideshowURL;
     }
 
     /*
@@ -411,7 +396,7 @@ public class GitRepoRenderer {
 
     /*
      * Return the "best fit" repo language or branch
-     * name when rendering the landing page.
+     * name when rendering the presentation.
      */
     public String displayLangOrBranch() {
 
@@ -437,7 +422,8 @@ public class GitRepoRenderer {
         grs = (grs != null) ? grs : _pp.grs;
 
         if (absolute)
-            return com.gitpitch.controllers.routes.PitchController.landing(_pp.user,
+            return com.gitpitch.controllers.routes.PitchController
+                    .slideshow(_pp.user,
                     _pp.repo,
                     _pp.branch,
                     grs,
@@ -448,7 +434,8 @@ public class GitRepoRenderer {
                     .absoluteURL(isEncrypted(),
                             hostname());
         else
-            return com.gitpitch.controllers.routes.PitchController.landing(_pp.user,
+            return com.gitpitch.controllers.routes.PitchController
+                    .slideshow(_pp.user,
                     _pp.repo,
                     _pp.branch,
                     grs,
@@ -459,7 +446,8 @@ public class GitRepoRenderer {
 
     public String pageLinkWithTheme(String theme) {
 
-        return com.gitpitch.controllers.routes.PitchController.landing(_pp.user,
+        return com.gitpitch.controllers.routes.PitchController
+                .slideshow(_pp.user,
                 _pp.repo,
                 _pp.branch,
                 _pp.grs,
@@ -482,7 +470,8 @@ public class GitRepoRenderer {
 
     public String printBrowserLink() {
 
-        return com.gitpitch.controllers.routes.PitchController.landing(_pp.user,
+        return com.gitpitch.controllers.routes.PitchController
+                .slideshow(_pp.user,
                 _pp.repo,
                 _pp.branch,
                 _pp.grs,
@@ -582,7 +571,7 @@ public class GitRepoRenderer {
      * Return string representation of ViewModel.
      */
     public String toString() {
-        return _landingURL;
+        return _slideshowURL;
     }
 
     private boolean isEncrypted() {
@@ -597,7 +586,6 @@ public class GitRepoRenderer {
     private static final String GIT_TREE   = "/tree/";
     private static final String GIT_BLOB   = "/blob/";
     private static final String CSS = ".css";
-    private static final String SLIDESHOW = "/pitchme/slideshow/";
     private static final String MARKDOWN = "/pitchme/markdown/";
     private static final String SLASH = "/";
     private static final String QMARK_BRANCH = "?b=";
