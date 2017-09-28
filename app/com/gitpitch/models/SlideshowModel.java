@@ -209,6 +209,10 @@ public class SlideshowModel {
                 THEME_LIGHT_COLOR_INVERSE;
     }
 
+    public boolean isDarkTheme() {
+      return PitchParams.isDarkTheme(fetchTheme());
+    }
+
     /*
      * Return true if "logo" defined in PITCHME.yaml.
      */
