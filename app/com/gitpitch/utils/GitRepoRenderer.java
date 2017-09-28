@@ -36,7 +36,7 @@ import play.Logger;
 import play.Logger.ALogger;
 
 /*
- * Rendering model for views.Presentation.html.
+ * Rendering model for views.Slideshow.scala.html.
  */
 public class GitRepoRenderer {
 

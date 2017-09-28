@@ -93,16 +93,15 @@ public class PitchController extends Controller {
             if (path != "/" && path.endsWith("/")) {
                 return redirect("/" + path.substring(0, path.length()-1));
             } else {
-                // return redirect("/");
                 return ok(com.gitpitch.views.html.NotFound.render());
             }
         } catch(Exception ex) {
-            return redirect("/");
+            return ok(com.gitpitch.views.html.NotFound.render());
         }
     }
 
     /*
-     * Presentation builds and renders a GitPitch presentation.
+     * Slideshow builds and renders a GitPitch presentation.
      */
     public CompletionStage<Result> slideshow(String user,
                                              String repo,
