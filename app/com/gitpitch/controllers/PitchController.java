@@ -219,7 +219,7 @@ public class PitchController extends Controller {
         if (mdmo.isPresent()) {
 
             MarkdownModel mdm = mdmo.get();
-            log.info("markdown:  [ md, cached, online ] {}", pp);
+            log.info("markdown:  [ mdwn, cached, online ] {}", pp);
             return CompletableFuture.completedFuture(ok(mdm.produce())
                     .as("text/markdown"));
 
@@ -233,15 +233,15 @@ public class PitchController extends Controller {
                     .thenApply(fetched -> {
 
                         if (fetched != null) {
-                            log.info("markdown:  [ md, fetchd, online ] {}", pp);
+                            log.info("markdown:  [ mdwn, fetchd, online ] {}", pp);
                             return ok(fetched.produce()).as("text/markdown");
                         }
                         if (pp.isMaster()) {
-                            log.info("markdown:  [ md, notfnd, online ] {}", pp);
+                            log.info("markdown:  [ mdwn, notfnd, online ] {}", pp);
                             return ok(RFE.master(pp, grsManager.get(pp)))
                                     .as("text/markdown");
                         } else {
-                            log.info("markdown:  [ md, notfnd, online ] {}", pp);
+                            log.info("markdown:  [ mdwn, notfnd, online ] {}", pp);
                             return ok(RFE.branch(pp, grsManager.get(pp)))
                                     .as("text/markdown");
                         }
