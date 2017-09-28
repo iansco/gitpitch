@@ -118,22 +118,14 @@
     @SlideshowReveal(ssm, deps, offline, serverPrinting, webPrinting)
 
     <script>
-        @if(ssm.fixedTheme()) {
-        Reveal.addEventListener( 'ready', function( event ) {
-            window.parent.postMessage("FIXEDTHEME", '*');
-        });
-        }
-
         function pushNotification(msg, fade) {
           var notification = document.getElementById('notification')
-          if(notification != undefined) {
-            if(fade) {
-              notification.className = "footer-fade";
-              notification.innerHTML = msg;
-            } else {
-              notification.className = "footer-hard";
-              notification.innerHTML = msg;
-            }
+          if(fade) {
+            notification.className = "footer-fade";
+            notification.innerHTML = msg;
+          } else {
+            notification.className = "footer-hard";
+            notification.innerHTML = msg;
           }
         };
 
@@ -142,7 +134,7 @@
         }
 
         function pushFootnoteNotification() {
-          @if(ssm.hasFootnote()) {
+          @if(ssm.hasFootnote() && ssm.fetchFootnote().length() != 0) {
             pushNotification("@Html(ssm.fetchFootnote())", true);
           } else {
             pushNotification("[ GitPitch @Html(ssm.params().atPretty()) ]", true);
@@ -152,6 +144,7 @@
         function pushCodePresentingStepNotification(step, frags) {
           pushNotification("Code Presenting - Step " + step + " / " + frags, true);
         }
+
     </script>
 </body>
 </html>
