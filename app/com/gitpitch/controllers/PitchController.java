@@ -131,9 +131,9 @@ public class PitchController extends Controller {
         if (grmo.isPresent() && ssmo.isPresent()) {
 
             if (isOffline)
-                log.info("slideshow:   [ cached, offlne ] {}", pp);
+                log.info("slideshow: [ deps, cached, offlne ] {}", pp);
             else
-                log.info("slideshow:   [ cached, online ] {}", pp);
+                log.info("slideshow: [ deps, cached, online ] {}", pp);
 
             GitRepoModel grm = grmo.get();
             GitRepoRenderer rndr =
@@ -162,26 +162,15 @@ public class PitchController extends Controller {
                             GitRepoRenderer.build(pp, repoFetched, cfg,
                                     grsManager.listGRS());
 
-                        if (rndr.isValid()) {
-                            if (isOffline)
-                                log.info("slideshow:   [ fetchd, offlne ] {}", pp);
-                            else
-                                log.info("slideshow:   [ fetchd, online ] {}", pp);
-                        } else {
-                            if (isOffline)
-                                log.info("slideshow:   [ notfnd, offlne ] {}", pp);
-                            else
-                                log.info("slideshow:   [ notfnd, online ] {}", pp);
-                        }
-
                         if (ssmo.isPresent()) {
 
                             if (webPrinting)
-                                log.info("slideshow: [ cached, printg ] {}", pp);
-                            else if (isOffline)
-                                log.info("slideshow: [ cached, offlne ] {}", pp);
+                                log.info("slideshow: [ repo, fetchd, printg ] {}", pp);
                             else
-                                log.info("slideshow: [ cached, online ] {}", pp);
+                            if (isOffline)
+                                log.info("slideshow: [ repo, fetchd, offlne ] {}", pp);
+                            else
+                                log.info("slideshow: [ repo, fetchd, online ] {}", pp);
 
                             SlideshowModel ssm = ssmo.get();
                             /*
@@ -197,11 +186,12 @@ public class PitchController extends Controller {
                             SlideshowModel ssm = pitchService.fetchYAML(pp);
 
                             if (webPrinting)
-                                log.info("slideshow: [ fetchd, printg ] {}", pp);
-                            if (isOffline)
-                                log.info("slideshow: [ fetchd, offlne ] {}", pp);
+                                log.info("slideshow: [ yaml, fetchd, printg ] {}", pp);
                             else
-                                log.info("slideshow: [ fetchd, online ] {}", pp);
+                            if (isOffline)
+                                log.info("slideshow: [ yaml, fetchd, offlne ] {}", pp);
+                            else
+                                log.info("slideshow: [ yaml, fetchd, online ] {}", pp);
 
                             return ok(com.gitpitch.views.html.Slideshow.render(ssm,
                                     deps, isOffline, serverPrinting, webPrinting));
@@ -229,7 +219,7 @@ public class PitchController extends Controller {
         if (mdmo.isPresent()) {
 
             MarkdownModel mdm = mdmo.get();
-            log.info("markdown:  [ cached, online ] {}", pp);
+            log.info("markdown:  [ md, cached, online ] {}", pp);
             return CompletableFuture.completedFuture(ok(mdm.produce())
                     .as("text/markdown"));
 
@@ -243,15 +233,15 @@ public class PitchController extends Controller {
                     .thenApply(fetched -> {
 
                         if (fetched != null) {
-                            log.info("markdown:  [ fetchd, online ] {}", pp);
+                            log.info("markdown:  [ md, fetchd, online ] {}", pp);
                             return ok(fetched.produce()).as("text/markdown");
                         }
                         if (pp.isMaster()) {
-                            log.info("markdown:  [ notfnd, online ] {}", pp);
+                            log.info("markdown:  [ md, notfnd, online ] {}", pp);
                             return ok(RFE.master(pp, grsManager.get(pp)))
                                     .as("text/markdown");
                         } else {
-                            log.info("markdown:  [ notfnd, online ] {}", pp);
+                            log.info("markdown:  [ md, notfnd, online ] {}", pp);
                             return ok(RFE.branch(pp, grsManager.get(pp)))
                                     .as("text/markdown");
                         }
