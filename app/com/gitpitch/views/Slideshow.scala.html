@@ -10,82 +10,16 @@
     <title>@ssm.params().asTitle()</title>
     <meta content="Markdown Presentation powered by GitPitch." name="description">
     <meta content="GitHub, GitLab, Bitbucket, Markdown, Slideshow, Presentation, Developers, PITCHME" name="keywords">
-    @if(offline) {
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Cache-Control" content="no-cache">
-    }
-    <link rel="icon" href="@deps.gitpitchimg(offline)/favicon.ico"/>
-    <link href="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/reveal.css" rel="stylesheet" type="text/css"/>
-    <link href="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/theme/@ssm.fetchThemeCSS()" rel="stylesheet" type="text/css" id="theme"/>
 
-    <link href="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/plugin/title-footer/title-footer-mod.css" rel="stylesheet" type="text/css" id="theme"/>
-    @if(webPrinting) {
-    <link href="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/print/pdf.css" rel="stylesheet" type="text/css"/>
-    } else {
-    <link href="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/css/print/paper.css" rel="stylesheet" type="text/css"/>
-    }
-    <link href="@deps.highlightjs(offline)/@ssm.fetchHighlightCSS()" rel="stylesheet" type="text/css"/>
-    <link href="@deps.octicons(offline)/octicons.css" rel="stylesheet" type="text/css"/>
-    <link href="@deps.fontawesome(offline)/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    @if(!offline) {
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    }
-
-    @SlideshowStyle(offline)
+    @SlideshowStyleDependencies(ssm, deps, offline, webPrinting)
+    @SlideshowMenuStyle(offline)
     @SlideshowCodeFragHighlightStyle()
-    @if(ssm.hasThemeOverride()) {
-    <style>
-    @Html(ssm.fetchThemeOverride())
-    </style>
-    }
-
-    @if(!offline) {
-        @if(!serverPrinting) {
-            @if(ssm.hasGAToken()) {
-                @GoogleAnalytics(ssm.fetchGAToken())
-            }
-        }
-    }
+    @SlideshowThemeOverride(ssm)
+    @SlideshowGoogleAnalytics(ssm, offline, serverPrinting)
 
 </head>
 <body>
-    @if(ssm.hasLogo()) {
-    <div id="gp-logo" style="@ssm.fetchLogoPosition()">
-        @if(offline) {
-        <img src="./assets/@ssm.fetchLogoName()"/>
-        } else {
-        <img src="@ssm.fetchLogo()"/>
-        }
-    </div>
-    }
-
-    @if(serverPrinting || webPrinting) {
-    <div style="position: fixed; bottom: 10px; left: 20px; z-index: 999">
-        @if(ssm.hasFootnote()) {
-        <span style="color:@ssm.fetchThemeFontColorInverse(); font-size:0.8em; font-family: @ssm.fetchThemeFont();">@Html(ssm.fetchFootnote())</span>
-        } else {
-            @if(ssm.params().grs.equals("github")) {
-            <span class="octicon octicon-mark-github"
-                  style="font-size:0.9em; color: @ssm.fetchThemeFontColorInverse()"></span>
-            }
-            @if(ssm.params().grs.equals("gitlab")) {
-            <i class="fa fa-gitlab" aria-hidden="true"
-                  style="font-size:0.9em; color: @ssm.fetchThemeFontColorInverse()"></i>
-            }
-            @if(ssm.params().grs.equals("bitbucket")) {
-            <i class="fa fa-bitbucket" aria-hidden="true"
-                  style="font-size:0.9em; color: @ssm.fetchThemeFontColorInverse()"></i>
-            }
-            @if(ssm.params().grs.equals("gitea") || ssm.params().grs.equals("gogs") ||
-                ssm.params().grs.equals("gitbucket")) {
-            <i class="fa fa-git-square" aria-hidden="true"
-                  style="font-size:0.9em; color: @ssm.fetchThemeFontColorInverse()"></i>
-            }
-            <span style="color:@ssm.fetchThemeFontColorInverse(); font-size:0.8em; font-family: @ssm.fetchThemeFont();">@ssm.params().asLogo()</span>
-        }
-    </div>
-    }
-
+    @SlideshowLogo(ssm, offline)
     <div class="reveal">
         <div class="slides">
             @if(offline) {
@@ -104,47 +38,17 @@
             </section>
             }
         </div>
-        @if(!(serverPrinting || webPrinting)) {
-        <footer id="title-footer"><p id="notification"></p></footer>
-        }
-
+        @SlideshowPresentingFooter(ssm, serverPrinting, webPrinting)
     </div>
     <div class="gp-menu"></div>
+    @SlideshowPrintFooter(ssm, serverPrinting, webPrinting)
 
     <script src="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/js/reveal.js"></script>
     <script src="@deps.revealjs(offline, ssm.fetchRevealVersionOverride())/lib/js/head.min.js"></script>
     <script src="@deps.jquery(offline)/jquery.min.js"></script>
 
     @SlideshowReveal(ssm, deps, offline, serverPrinting, webPrinting)
+    @SlideshowNotifications(ssm)
 
-    <script>
-        function pushNotification(msg, fade) {
-          var notification = document.getElementById('notification')
-          if(fade) {
-            notification.className = "footer-fade";
-            notification.innerHTML = msg;
-          } else {
-            notification.className = "footer-hard";
-            notification.innerHTML = msg;
-          }
-        };
-
-        function pushHelpNotification() {
-          pushNotification("@Html(ssm.fetchHelp())");
-        }
-
-        function pushFootnoteNotification() {
-          @if(ssm.hasFootnote() && ssm.fetchFootnote().length() != 0) {
-            pushNotification("@Html(ssm.fetchFootnote())", true);
-          } else {
-            pushNotification("[ GitPitch @Html(ssm.params().atPretty()) ]", true);
-          }
-        }
-
-        function pushCodePresentingStepNotification(step, frags) {
-          pushNotification("Code Presenting - Step " + step + " / " + frags, true);
-        }
-
-    </script>
 </body>
 </html>
