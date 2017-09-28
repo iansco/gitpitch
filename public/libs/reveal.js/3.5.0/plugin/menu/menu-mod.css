@@ -7,8 +7,8 @@
 	height: 100%;
 	border-right: 1px solid gray;
 	transition: transform 0.3s;
-  	font-size: 16px;
-  	font-weight: normal;
+	font-size: 16px;
+	font-weight: normal;
 }
 
 /*
@@ -150,8 +150,8 @@
 }
 
 .gp-menu .slide-menu-toolbar > li.active-toolbar-button {
- 	color: #e49436;
- 	text-shadow: 0 1px black;
+	color: #e49436;
+	text-shadow: 0 1px black;
 }
 
 .slide-menu-toolbar > li:hover {

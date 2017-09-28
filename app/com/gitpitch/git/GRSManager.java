@@ -181,7 +181,7 @@ public class GRSManager {
                        .stream()
                        .map(Map.Entry::getValue)
                        .collect(Collectors.toList());
-        // log.debug("listGRS: {}", services);
+        log.debug("listGRS: {}", services);
         return services;
     }
 

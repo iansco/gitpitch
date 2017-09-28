@@ -53,7 +53,6 @@ public class Module extends AbstractModule {
         bind(GISTService.class).asEagerSingleton();
         bind(CodeService.class).asEagerSingleton();
         bind(ShortcutsService.class).asEagerSingleton();
-        bind(SplashService.class).asEagerSingleton();
         bind(WebService.class).asEagerSingleton();
         bind(ComposableService.class).asEagerSingleton();
         bind(GRSManager.class).asEagerSingleton();
