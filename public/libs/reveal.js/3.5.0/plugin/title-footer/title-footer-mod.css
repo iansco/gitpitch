@@ -27,21 +27,28 @@
 	padding-bottom: 0.8vh;
 }
 
-/* Bottom position for the Title-Footer footer when both progress bar and TOC-Progress are visible */
-
+/*
+ * Bottom position for the Title-Footer footer when
+ * both progress bar and TOC-Progress are visible.
+ */
 div.progress[style="display: block;"] ~ #title-footer
 {
 	bottom: calc(3px + 10.5vh);
 }
 
-/* Bottom position for the Title-Footer footer when TOC-Progress is visible */
-
+/*
+ * Bottom position for the Title-Footer footer when
+ * TOC-Progress is visible.
+ */
 #title-footer
 {
 	bottom: 10.5vh;
 }
 
-/* This is to fix the positioning of the title which goes off screen due to a new reveal.js CSS property. */
+/*
+ * This is to fix the positioning of the title which goes
+ * off screen due to a new reveal.js CSS property.
+ */
 #title-footer p{
 	margin: 0;
 }
@@ -53,8 +60,10 @@ div.progress[style="display: block;"] ~ footer:last-of-type#title-footer
 	bottom: 3px;
 }
 
-/* Bottom position for the Title-Footer footer when neither progress bar nor TOC-Progress are visible */
-
+/*
+ * Bottom position for the Title-Footer footer when neither
+ * progress bar nor TOC-Progress are visible
+ */
 footer:last-of-type#title-footer
 {
 	bottom: 0px;

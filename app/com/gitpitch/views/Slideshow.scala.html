@@ -10,14 +10,13 @@
     <title>@ssm.params().asTitle()</title>
     <meta content="Markdown Presentation powered by GitPitch." name="description">
     <meta content="GitHub, GitLab, Bitbucket, Markdown, Slideshow, Presentation, Developers, PITCHME" name="keywords">
-
     @SlideshowStyleDependencies(ssm, deps, offline, webPrinting)
+    @SlideshowRevealCoreOverrides()
     @SlideshowMenuStyle(offline)
-    @SlideshowFooterStyle(ssm)
+    @SlideshowNotificationBarStyle(ssm)
     @SlideshowCodeFragHighlightStyle()
     @SlideshowThemeOverride(ssm)
     @SlideshowGoogleAnalytics(ssm, offline, serverPrinting)
-
 </head>
 <body>
     @SlideshowLogo(ssm, offline)
