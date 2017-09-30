@@ -229,7 +229,8 @@ public class GitRepoRenderer {
      * Return GitHub {pitchme} path.
      */
     public String pitchme() {
-        return _pp.pitchme;
+        return (_pp.pitchme != null) ?
+            _pp.pitchme.replaceAll("/", ".") : PITCHME;
     }
 
     /*
@@ -611,6 +612,7 @@ public class GitRepoRenderer {
     private static final String BADGE_OPEN =
             "[![GitPitch](https://gitpitch.com/assets/badge.svg)](";
     private static final String BADGE_CLOSE = ")";
+    private static final String PITCHME = "PITCHME.md";
     private static final String DEFAULT_PITCHME = "/PITCHME.md";
     private static final String DEFAULT_THEME = "white";
     private static final List<String> THEMES = Arrays.asList(DEFAULT_THEME,
