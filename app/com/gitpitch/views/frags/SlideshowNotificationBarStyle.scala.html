@@ -1,5 +1,8 @@
 @(ssm: com.gitpitch.models.SlideshowModel)
 <style>
+  #title-footer #notification {
+    font-family: 'Roboto', sans-serif;
+  }
   #title-footer p {
     text-align: center;
     font-size: 0.9em;
@@ -8,7 +11,12 @@
     font-family: 'Roboto', sans-serif;
     letter-spacing: 0;
   }
-  #title-footer div.footer-hard {
+  #title-footer p.footer-hard {
+    @if(ssm.isDarkTheme()) {
+    color: #bbb;
+    } else {
+    color: #4d4d4d;
+    }
   }
   #title-footer p.footer-fade {
     @if(ssm.isDarkTheme()) {
@@ -21,13 +29,5 @@
     font-size: 1.5vh;
     letter-spacing: 0;
     padding-top: 3px;
-  }
-  #title-footer #notification > span {
-    font-family: 'Roboto', sans-serif;
-    font-size: 85%;
-  }
-  #title-footer div.slide-number {
-    color: inherit !important;
-    opacity: 0.7;
   }
 </style>

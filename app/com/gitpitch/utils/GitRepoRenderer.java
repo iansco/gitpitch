@@ -494,13 +494,26 @@ public class GitRepoRenderer {
                 _pp.notes).toString();
     }
 
-    public String tweetLink() {
+    public String twitterLink() {
 
       return new StringBuffer("http://twitter.com/share?text=")
                   .append("GitPitch presentation...")
                   .append("&url=")
                   .append(pageLink(true, null))
                   .append("&hashtags=gitpitch")
+                  .toString();
+
+    }
+
+    public String linkedInLink() {
+
+      return new StringBuffer("https://www.linkedin.com/shareArticle")
+                  .append("?source=gitpitch")
+                  .append("&mini=true")
+                  .append("&summary=GitPitch%20presentation...")
+                  .append("&title=GitPitch")
+                  .append("&url=")
+                  .append(pageLink(true, null))
                   .toString();
 
     }

@@ -551,13 +551,11 @@ public class SlideshowModel {
             });
 
     private static final String HELP =
-        "<p style='color: gray;'>" +
         "Navigate : Space / Arrow Keys | " +
         "<a href='#' onclick='RevealMenu.toggle()'>M</a> - Menu | " +
         "<a href='#' onclick='enterFullscreen()'>F</a> - Fullscreen | " +
         "<a href='#' onclick='enterOverview()'>O</a> - Overview | " +
         "<a href='#' onclick='enterBlackout()'>B</a> - Blackout | " +
         "<a href='#' onclick='RevealNotes.open()'>S</a> - Speaker | " +
-        "<a href='#' onclick='enterHelp()'>?</a> - Help" +
-        "</p>";
+        "<a href='#' onclick='enterHelp()'>?</a> - Help";
 }
