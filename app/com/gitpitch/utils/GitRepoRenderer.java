@@ -570,7 +570,11 @@ public class GitRepoRenderer {
     }
 
     public List<String> listThemes() {
-      return _cfg.getStringList("gitpitch.revealjs.themes");
+      List<String> themesList = _cfg.getStringList("gitpitch.revealjs.themes");
+      if(themesList == null || themesList.isEmpty()) {
+          themesList = DEPLOY_THEMES;
+      }
+      return themesList;
     }
 
     public String pageDescription() {
@@ -639,4 +643,7 @@ public class GitRepoRenderer {
 
     private static final String AS_DESCR =
         "Markdown Presentation powered by GitPitch.";
+
+    private static final List<String> DEPLOY_THEMES =
+            Arrays.asList("black", "moon", "night", "beige", "sky", "white");
 }
