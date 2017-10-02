@@ -50,7 +50,6 @@ public class DiskService {
 
     private final String storage;
     private final String decktape;
-    private final String rawAuthToken;
     private final ShellService shellService;
     private final Configuration configuration;
     private final WebService ws;
@@ -65,13 +64,17 @@ public class DiskService {
         this.ws = ws;
         this.storage = configuration.getString("gitpitch.storage.home");
         this.decktape = configuration.getString("gitpitch.decktape.home");
-        this.rawAuthToken = configuration.getString("gitpitch.raw.auth.token");
     }
 
     /*
      * Return PitchParams branch working directory.
      */
     public Path bwd(PitchParams pp) {
+        log.debug("bwd: pp={}, storage={}", pp, storage());
+        if(pp != null)
+            log.debug("bwd: pp.grs={}", pp.grs);
+        else
+            log.debug("bwd: pp.grs is NULL");
         return Paths.get(storage(), pp.grs, pp.user, pp.repo, pp.branch);
     }
 
@@ -284,10 +287,6 @@ public class DiskService {
      */
     public String decktape() {
         return decktape;
-    }
-
-    public String rawAuthToken() {
-        return rawAuthToken;
     }
 
     private static final Integer STATUS_OK = 0;
