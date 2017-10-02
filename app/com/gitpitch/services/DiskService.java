@@ -70,11 +70,6 @@ public class DiskService {
      * Return PitchParams branch working directory.
      */
     public Path bwd(PitchParams pp) {
-        log.debug("bwd: pp={}, storage={}", pp, storage());
-        if(pp != null)
-            log.debug("bwd: pp.grs={}", pp.grs);
-        else
-            log.debug("bwd: pp.grs is NULL");
         return Paths.get(storage(), pp.grs, pp.user, pp.repo, pp.branch);
     }
 
@@ -169,7 +164,7 @@ public class DiskService {
                         fetched.length, destPath, source);
 
             } else {
-                log.debug("download: pp={}, failed to download and write " +
+                log.warn("download: pp={}, failed to download and write " +
                         "from source={}", pp, source);
             }
         } catch(Exception dex) {

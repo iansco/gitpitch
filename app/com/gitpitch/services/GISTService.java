@@ -86,13 +86,9 @@ public class GISTService {
                * active-GRS to ensure communiction with GitHub.
                */
               GRS grs = grsManager.get(GitHub.TYPE);
-              log.debug("build: grs={}", grs);
               GRSService grsService = grsManager.getService(grs);
-              log.debug("build: grsService={}", grsService);
               Path branchPath = diskService.ensure(pp);
-              log.debug("build: branchPath={}", branchPath);
               String gistLink = grsService.gist(pp, gid, fileHint);
-              log.debug("build: gistLink={}", gistLink);
 
               int downStatus =
                   diskService.download(pp, branchPath, gistLink,
