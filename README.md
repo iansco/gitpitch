@@ -18,7 +18,7 @@
 
 ## What is GitPitch?
 
-GitPitch is a service that turns **[PITCHME.md](https://gitpitch.com/#gitpitch-pitchme-markdown)** markdown into online and offline, interactive slideshows. You can use it to promote, pitch or present anything from designs and best practices, to code snippets and complete frameworks.
+GitPitch is a service that turns **[PITCHME.md](https://gitpitch.com/#gitpitch-pitchme-markdown)** markdown into online and offline, interactive slideshows. You can use it to promote, pitch or present absolutely anything.
 
 Each slideshow presentation is made instantly available online just as soon as you git-commit and push **PITCHME.md** on any branch within a public [GitHub, GitLab, Bitbucket, GitBucket, Gitea, or Gogs](https://github.com/gitpitch/gitpitch/wiki/Git-Repo-Services) repo.
 
@@ -28,17 +28,17 @@ GitPitch is an open source project so you can fork, clone, and modify the source
 
 ## Is GitPitch for you?
 
-If you ever find yourself needing to present a concept, design, library, integration, framework, or even course work:
+If you ever find yourself needing to present a concept, design, library, framework, product, service, or even course work:
 
 - To colleagues, clients or customers
-- To students
-- Or at meetups or conferences
+- At meetups or conferences
+- Or to student classes
 
 Then GitPitch is for you. Simply capture your ideas in Markdown and let GitPitch automatically turn those ideas into compelling, responsive, online and offline slideshow presentations.
 
 ## How does GitPitch work?
 
-GitPitch presentations are powered by the amazing [reveal.js](https://github.com/hakimel/reveal.js) presentation framework. But with GitPitch there is nothing to download. All you need is your favorite text editor. And an account on GitHub, GitLab, or Bitbucket. Or your instance of GitHub Enterprise, GitLab CE, GitBucket, Gitea, or Gogs.
+GitPitch presentations are powered by the amazing [reveal.js](https://github.com/hakimel/reveal.js) presentation framework. But with GitPitch there is nothing to download. Nothing to install. All you need is your favorite text editor. And an account on GitHub, GitLab, or Bitbucket. Or your instance of GitHub Enterprise, GitLab CE, GitBucket, Gitea, or Gogs.
 
 ![TERMINAL](images/gp-terminal.png)
 
@@ -68,7 +68,7 @@ Or further [customize the look and feel](https://github.com/gitpitch/gitpitch/wi
 
 ![SLIDESHOW](images/gp-slideshow-room.png)
 
-## GitPitch slideshow presentations are code-aware
+## GitPitch slideshow presentations speak code fluently
 
 ![CODE-PRESENTING](images/gp-code-presenting-preview.gif)
 
