@@ -70,7 +70,7 @@ Or further [customize the look and feel](https://github.com/gitpitch/gitpitch/wi
 
 ## GitPitch slideshow presentations speak code fluently
 
-![CODE-PRESENTING](images/gp-code-presenting-preview.gif)
+![CODE-PRESENTING](images/gp-code-presenting-series.gif)
 
 Step-through static-code blocks or the complete source-code from any file in the repo, line-by-line or section-by-section, from directly within any slideshow presentation using [code-presenting](https://github.com/gitpitch/gitpitch/wiki/Code-Presenting).
 
