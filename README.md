@@ -9,7 +9,7 @@
 - [How does GitPitch work?](#how-does-gitpitch-work)
 - [Compelling Presentations](#gitpitch-slideshow-presentations-are-compelling)
 - [Customizable Presentations](#gitpitch-slideshow-presentations-are-customizable)
-- [Code-Aware Presentations](#gitpitch-slideshow-presentations-are-code-aware)
+- [Code-Ready Presentations](#gitpitch-slideshow-presentations-speak-code-fluently)
 - [Speaker-Ready Presentations](#gitpitch-slideshow-presentations-are-speaker-ready)
 - [Modular Presentations](#gitpitch-slideshow-presentations-are-modular)
 - [Social Presentations](#gitpitch-slideshow-presentations-are-social)
