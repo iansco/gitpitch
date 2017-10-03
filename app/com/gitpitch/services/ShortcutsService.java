@@ -176,7 +176,7 @@ public class ShortcutsService {
     private static final String FRAGMENT =
         " <!-- .element: class=\"fragment\" -->";
     private static final String HTML_CODE_FRAG_OPEN =
-        "<span class=\"fragment current-only\" data-code-focus=\"";
+        "<span class=\"code-presenting-annotation fragment current-only\" data-code-focus=\"";
     private static final String HTML_CODE_FRAG_CLOSE = "\">";
     private static final String HTML_CODE_FRAG_NOTE_CLOSE = "</span>";
     private static final String TITLE_HINT_SPAN_OPEN =
