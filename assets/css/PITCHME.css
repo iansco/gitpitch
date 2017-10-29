@@ -6,15 +6,15 @@
   color: gray;
 }
 
-.byline, .aside {
+span.byline, span.aside {
   color: #bbb;
 }
 
-.byline {
+span.byline {
   font-size: 80%;
 }
 
-.aside {
+span.aside {
   font-size: 0.7em;
   font-style: italic;
 }
