@@ -1,4 +1,4 @@
 theme : night
-background : images/wallpaper.jpg
-logo : images/logo.png
+background : assets/images/wallpaper.jpg
+logo : assets/images/logo.png
 transition : none
