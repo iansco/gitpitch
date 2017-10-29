@@ -3,10 +3,8 @@
 # Git<span class="gold">Pitch</span>
 
 #### Markdown Presentations For Everyone on Git.*
-
 <br>
 <br>
-
 <span class="byline">[ GitHub, GitLab, Bitbucket, GitBucket, Gitea, Gogs ]</span>
 
 ---
@@ -16,16 +14,14 @@
 #### GitPitch turns <span class="gold">PITCHME.md</span> into
 #### interactive,
 #### online and offline slideshows.
-
 <br>
-
 <span class="aside">Just like this one...</span>
 
 ---
 
 #### No more <span class="gray">Keynote</span>.
 #### No more <span class="gray">Powerpoint</span>.
-
+<br>
 #### Just <span class="gold">Markdown</span>.
 #### Then <span class="gold">Git-Commit</span>.
 
@@ -36,7 +32,7 @@
 ### <span class="gold">STEP 1. Create 'PITCHME.md'</span>
 
 #### Create GitPitch slideshow content using GitHub Flavored Markdown in your favorite editor.
-
+<br>
 <span class="aside">It's as easy as README.md with simple slide-delimeters (---)</span>
 
 ---
@@ -44,6 +40,7 @@
 @title[Step 2. Git-Commit]
 
 ### <span class="gold">STEP 2. GIT-COMMIT</span>
+<br>
 
 ```shell
 $ git add PITCHME.md
@@ -63,9 +60,9 @@ Done!
 @title[Step 3. Done!]
 
 ### <span class="gold">STEP 3. GET THE WORD OUT!</span>
-
+<br>
 ![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
-
+<br>
 #### Instantly use your GitPitch slideshow URL to promote, pitch or present absolutely anything.
 
 ---
@@ -77,7 +74,7 @@ Done!
 #### Code Presenting for Blocks, Files, and GISTs
 #### Image, Video, Chart, and Math Slides
 #### Multiple Themes with Easy Customization
-
+<br>
 #### <span class="gold">Plus collaboration is built-in...</span>
 #### Your Slideshow is Part of Your Project
 #### Under Git Version Control within Your Git Repo
@@ -98,5 +95,5 @@ Done!
 
 ### Go for it.
 ### Just add <span class="gold">PITCHME.md</span> ;)
-
+<br>
 [Click here to learn more...](https://github.com/gitpitch/gitpitch/wiki)
