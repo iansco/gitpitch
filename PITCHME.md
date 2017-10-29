@@ -4,7 +4,8 @@
 
 #### Markdown Presentations For Everyone on Git.*
 
-
+<br>
+<br>
 
 <span class="byline">[ GitHub, GitLab, Bitbucket, GitBucket, Gitea, Gogs ]</span>
 
@@ -15,6 +16,8 @@
 #### GitPitch turns <span class="gold">PITCHME.md</span> into
 #### interactive,
 #### online and offline slideshows.
+
+<br>
 
 <span class="aside">Just like this one...</span>
 
