@@ -63,6 +63,7 @@ Done!
 <br>
 ![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
 <br>
+<br>
 #### Instantly use your GitPitch slideshow URL to promote, pitch or present absolutely anything.
 
 ---
