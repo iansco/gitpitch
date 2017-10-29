@@ -1,3 +1,24 @@
+.gold {
+  color: #e49436;
+}
+
+.gray {
+  color: gray;
+}
+
+.byline, .aside {
+  color: #bbb;
+}
+
+.byline {
+  font-size: 80%;
+}
+
+.aside {
+  font-size: 0.7em;
+  font-style: italic;
+}
+
 .reveal section img {
   border: 0;
   box-shadow: none;
