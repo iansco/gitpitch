@@ -30,7 +30,7 @@
 @title[Step 1. PITCHME.md]
 
 ### <span class="gold">STEP 1. Create 'PITCHME.md'</span>
-
+<br>
 #### Create GitPitch slideshow content using GitHub Flavored Markdown in your favorite editor.
 <br>
 <span class="aside">It's as easy as README.md with simple slide-delimeters (---)</span>
