@@ -24,3 +24,12 @@ span.aside {
   box-shadow: none;
   background: none;
 }
+
+.reveal section a {
+  color: #e49436;
+  text-decoration: underline;
+}
+
+.reveal section a:hover {
+  color: #e7ad52;
+}
