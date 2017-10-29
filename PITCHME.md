@@ -60,9 +60,9 @@ Done!
 @title[Step 3. Done!]
 
 ### <span class="gold">STEP 3. GET THE WORD OUT!</span>
-<br>
+<br><br>
 ![GitPitch Slideshow URLs](assets/images/gp-slideshow-urls.png)
-<br>
+<br><br>
 #### Instantly use your GitPitch slideshow URL to promote, pitch or present absolutely anything.
 
 ---
